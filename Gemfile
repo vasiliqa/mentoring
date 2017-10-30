@@ -43,7 +43,6 @@ gem 'active_link_to'
 gem 'cocoon', '~> 1.2.6'
 
 # forum
-gem 'forem', github: 'radar/forem', branch: 'rails4'
 gem 'kaminari', '0.15.1'
 gem 'celluloid', '0.16.0'
 

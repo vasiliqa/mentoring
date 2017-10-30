@@ -6,7 +6,6 @@ GIT
       sass (>= 3.2)
 
 GIT
-  remote: git://github.com/radar/forem.git
   revision: b232010d9238cb196c169dc1fe2369b101d709ed
   branch: rails4
   specs:
@@ -457,7 +456,6 @@ DEPENDENCIES
   dropzonejs-rails
   email_spec
   factory_girl_rails
-  forem!
   jbuilder (~> 2.0)
   jquery-datetimepicker-rails
   jquery-rails

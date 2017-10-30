@@ -31,8 +31,6 @@ class Ability
                                               trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
-                                              trackable_type: 'Forem::Topic'}
 
       elsif roles.include? 'curator'
         subordinates_ids = user.subordinates.with_role(:mentor).pluck(:id)
@@ -56,8 +54,6 @@ class Ability
                                               trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
-                                              trackable_type: 'Forem::Topic'}
 
       elsif roles.include? 'admin'
         can :manage, :all

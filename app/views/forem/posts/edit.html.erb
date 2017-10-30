@@ -1,8 +1,0 @@
-<%= render :partial => 'forem/forums/head', :locals => { :forum => @topic.forum } %>
-
-<h2 class="ui header"><%= t("forem.post.edit", :post => @post) %></h2>
-
-<%= simple_form_for [forem, @topic.forum, @topic, @post], html: {class: 'ui form'} do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-  <%= f.submit t("forem.post.buttons.edit"), :class => "btn btn-primary ui green button" %>
-<% end %>

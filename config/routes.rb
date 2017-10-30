@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 
   resources :activities, module: :public_activity, only: [:index]
 
-  mount Forem::Engine, at: '/forums'
-  
   resources :candidates do
     get :approve, on: :member
   end

@@ -3,11 +3,8 @@ class ApplicationController < ActionController::Base
 
   before_filter :main_ability
   protect_from_forgery with: :exception
-  helper_method :forem_user, :mailbox, :unread_mails_count, :children_for_friendship
 
-  def forem_user
-    current_user
-  end
+  helper_method :mailbox, :unread_mails_count, :children_for_friendship
 
   def mailbox
     current_user.mailbox
