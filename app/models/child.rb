@@ -18,6 +18,10 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #
+# Indexes
+#
+#  index_children_on_orphanage_id  (orphanage_id)
+#
 
 class Child < ApplicationRecord
   belongs_to :orphanage

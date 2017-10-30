@@ -19,14 +19,17 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  curator_id             :integer
-#  forem_admin            :boolean          default(FALSE)
-#  forem_state            :string           default("pending_review")
-#  forem_auto_subscribe   :boolean          default(FALSE)
 #  orphanage_id           :integer
 #  avatar_file_name       :string
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_orphanage_id          (orphanage_id)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
 FactoryBot.define do

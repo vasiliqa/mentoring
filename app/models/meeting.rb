@@ -10,6 +10,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_meetings_on_child_id  (child_id)
+#
 
 class Meeting < ApplicationRecord
   belongs_to :child

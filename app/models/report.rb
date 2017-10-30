@@ -16,6 +16,10 @@
 #  next_aim          :text
 #  other_comments    :text
 #
+# Indexes
+#
+#  index_reports_on_meeting_id  (meeting_id)
+#
 
 class Report < ApplicationRecord
   belongs_to :meeting

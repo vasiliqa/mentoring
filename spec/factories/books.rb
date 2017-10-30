@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string
-#  priority          :integer          default(2)
+#  priority          :integer          default("interesting")
 #  owner_id          :integer
 #  file_file_name    :string
 #  file_content_type :string
@@ -12,6 +12,10 @@
 #  file_updated_at   :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_books_on_owner_id  (owner_id)
 #
 
 FactoryBot.define do
