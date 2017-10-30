@@ -271,6 +271,7 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     public_suffix (3.0.0)
+    puma (3.10.0)
     rack (2.0.3)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -477,6 +478,7 @@ DEPENDENCIES
   pry-byebug
   pry-rails
   public_activity
+  puma
   rails (= 5.1.4)
   rails-controller-testing
   rails_admin
