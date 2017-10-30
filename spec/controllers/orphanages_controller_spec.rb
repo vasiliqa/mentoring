@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe OrphanagesController, :type => :controller do
+RSpec.describe OrphanagesController, type: :controller do
+  render_views
 
   let! (:admin) { create :user, :admin }
 
@@ -11,73 +12,63 @@ RSpec.describe OrphanagesController, :type => :controller do
     }
   end
 
-  let(:invalid_attributes) do
-    {
-        address: 'hbz'
-    }
-  end
+  let(:invalid_attributes) { { address: 'hbz' } }
 
   before(:each) { sign_in admin }
 
   describe "GET index" do
     it "assigns all orphanages as @orphanages" do
-      orphanage = Orphanage.create! valid_attributes
-      get :index, {}
+      orphanage = create :orphanage
+      get :index
       expect(assigns(:orphanages)).to eq([orphanage])
+      expect(response.status).to eq(200)
     end
   end
 
   describe "GET show" do
     it "assigns the requested orphanage as @orphanage" do
-      orphanage = Orphanage.create! valid_attributes
-      get :show, {:id => orphanage.to_param}
+      orphanage = create :orphanage
+      get :show, params: { id: orphanage.to_param }
       expect(assigns(:orphanage)).to eq(orphanage)
+      expect(response.status).to eq(200)
     end
   end
 
   describe "GET new" do
     it "assigns a new orphanage as @orphanage" do
-      get :new, {}
+      get :new
       expect(assigns(:orphanage)).to be_a_new(Orphanage)
+      expect(response.status).to eq(200)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested orphanage as @orphanage" do
-      orphanage = Orphanage.create! valid_attributes
-      get :edit, {:id => orphanage.to_param}
+      orphanage = create :orphanage
+      get :edit, params: { id: orphanage.to_param }
       expect(assigns(:orphanage)).to eq(orphanage)
+      expect(response.status).to eq(200)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Orphanage" do
-        expect {
-          post :create, {:orphanage => valid_attributes}
-        }.to change(Orphanage, :count).by(1)
-      end
-
-      it "assigns a newly created orphanage as @orphanage" do
-        post :create, {:orphanage => valid_attributes}
+        expect do
+          post :create, params: { orphanage: valid_attributes }
+        end.to change(Orphanage, :count).by(1)
         expect(assigns(:orphanage)).to be_a(Orphanage)
         expect(assigns(:orphanage)).to be_persisted
-      end
-
-      it "redirects to the created orphanage" do
-        post :create, {:orphanage => valid_attributes}
         expect(response).to redirect_to(Orphanage.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved orphanage as @orphanage" do
-        post :create, {:orphanage => invalid_attributes}
+      it "does not create a new Orphanage" do
+        expect do
+          post :create, params: { orphanage: invalid_attributes }
+        end.not_to change(Orphanage, :count)
         expect(assigns(:orphanage)).to be_a_new(Orphanage)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:orphanage => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -85,46 +76,37 @@ RSpec.describe OrphanagesController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) do
-        {
-            name: 'office 407'
-        }
-      end
+      let(:new_attributes) { { name: 'office 407' } }
 
       it "updates the requested orphanage" do
-        orphanage = Orphanage.create! valid_attributes
-        put :update, {:id => orphanage.to_param, :orphanage => new_attributes}
+        orphanage = create :orphanage
+        put :update, params: { id: orphanage.to_param, orphanage: new_attributes }
         orphanage.reload
         expect(orphanage.name).to eq(new_attributes[:name])
-      end
-
-      it "assigns the requested orphanage as @orphanage" do
-        orphanage = Orphanage.create! valid_attributes
-        put :update, {:id => orphanage.to_param, :orphanage => valid_attributes}
         expect(assigns(:orphanage)).to eq(orphanage)
-      end
-
-      it "redirects to the orphanage" do
-        orphanage = Orphanage.create! valid_attributes
-        put :update, {:id => orphanage.to_param, :orphanage => valid_attributes}
         expect(response).to redirect_to(orphanage)
+      end
+    end
+
+    describe "with invalid params" do
+      it "does not update the requested orphanage" do
+        orphanage = create :orphanage, name: 'Mark'
+        put :update, params: { id: orphanage.to_param, orphanage: { name: nil } }
+        orphanage.reload
+        expect(orphanage.name).to eq 'Mark'
+        expect(assigns(:orphanage)).to eq(orphanage)
+        expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
     it "destroys the requested orphanage" do
-      orphanage = Orphanage.create! valid_attributes
-      expect {
-        delete :destroy, {:id => orphanage.to_param}
-      }.to change(Orphanage, :count).by(-1)
-    end
-
-    it "redirects to the orphanages list" do
-      orphanage = Orphanage.create! valid_attributes
-      delete :destroy, {:id => orphanage.to_param}
+      orphanage = create :orphanage
+      expect do
+        delete :destroy, params: { id: orphanage.to_param }
+      end.to change(Orphanage, :count).by(-1)
       expect(response).to redirect_to(orphanages_url)
     end
   end
-
 end

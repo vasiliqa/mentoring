@@ -14,7 +14,7 @@
 #  updated_at        :datetime         not null
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :book do
     name '1984'
     priority 1

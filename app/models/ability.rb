@@ -66,7 +66,8 @@ class Ability
       can [:read, :create], Comment
       can :read, Album
       can :read, Photo
-      can :read, User, orphanage_id: user.orphanage_id
+      can :read, User, orphanage_id: user.orphanage_id unless user.orphanage_id == nil
+      can :read, user
       can :update, user
       can :read, Child, orphanage_id: user.orphanage_id
     end

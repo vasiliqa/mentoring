@@ -13,6 +13,6 @@
 #  updated_at   :datetime         not null
 #
 
-class CandidateEducation < ActiveRecord::Base
+class CandidateEducation < ApplicationRecord
   belongs_to :candidate
 end

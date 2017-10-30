@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CandidatesMailer, :type => :mailer do
+RSpec.describe CandidatesMailer, type: :mailer do
   let! (:admin) { create :user, :admin }
   let! (:candidate) { create :candidate }
   let(:mail) { CandidatesMailer.bid_received candidate }

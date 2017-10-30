@@ -54,7 +54,7 @@
 #  russian_citizenship      :boolean
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :candidate do
     last_name "Laden"
     first_name "Osama"
@@ -111,11 +111,5 @@ FactoryGirl.define do
     reports true
     photo_rights true
     info_about_program "internet"
-
-    candidate_educations {[FactoryGirl.build(:candidate_education)]}
-    candidate_family_members {[FactoryGirl.build(:candidate_family_member)]}
-    candidate_children_experiences {[FactoryGirl.build(:candidate_children_experience)]}
-
   end
-
 end

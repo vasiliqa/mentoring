@@ -12,12 +12,12 @@
 #  updated_at   :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :candidate_family_member do
-    name "Какое-то имя"
-    gender "Какой-то пол"
-    age "55"
-    relation "Шурин"
-  end
-
+FactoryBot.define do
+  # factory :candidate_family_member do
+  #   name "Какое-то имя"
+  #   gender "Какой-то пол"
+  #   age "55"
+  #   relation "Шурин"
+  #   candidate
+  # end
 end

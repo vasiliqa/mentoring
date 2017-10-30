@@ -360,12 +360,5 @@ ru:
               invalid: имеет неверное значение
             password_confirmation:
               confirmation: не совпадает со значением поля %{attribute}
-
-  simple_form:
-    labels:
-      category:
-        position: Позиция
-      forum:
-        position: Позиция
   by: от
   started_by: "Автор: "

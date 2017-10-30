@@ -15,16 +15,8 @@ RSpec.describe MeetingsController, :type => :routing do
       expect(:get => "/meetings/1").to route_to("meetings#show", :id => "1")
     end
 
-    it "routes to #edit" do
-      expect(:get => "/meetings/1/edit").to route_to("meetings#edit", :id => "1")
-    end
-
     it "routes to #create" do
       expect(:post => "/meetings").to route_to("meetings#create")
-    end
-
-    it "routes to #update" do
-      expect(:put => "/meetings/1").to route_to("meetings#update", :id => "1")
     end
 
     it "routes to #destroy" do
@@ -38,6 +30,5 @@ RSpec.describe MeetingsController, :type => :routing do
     it "routes to #reopen" do
       expect(:get => "/meetings/1/reopen").to route_to("meetings#reopen", :id => "1")
     end
-
   end
 end

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe PhotosController, :type => :controller do
+RSpec.describe PhotosController, type: :controller do
+  render_views
 
   let! (:orphanage) { create :orphanage }
   let! (:curator) { create :user, :curator, orphanage_id: orphanage.id }
@@ -28,44 +29,44 @@ RSpec.describe PhotosController, :type => :controller do
 
   describe '#show' do
     context 'when logged in' do
-      before do
-        get :show, id: photo.to_param
+      it do
+        get :show, params: { id: photo.to_param }
+        expect(response.status).to eq(200)
+        expect(response).to render_template('show')
       end
-
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to render_template('show') }
     end
   end
 
   describe '#create' do
     context 'with valid params' do
-      subject { post :create, photo: valid_attributes }
-      it { expect {subject}.to change(Photo, :count).by(1) }
-
       it do
-        subject
+        expect do
+          post :create, params: { photo: valid_attributes }
+        end.to change(Photo, :count).by(1)
         expect(response).to redirect_to(album_path(album))
       end
     end
 
     context 'with invalid params' do
-      before do
-        post :create, photo: invalid_attributes
+      it do
+        expect do
+          post :create, params: { photo: invalid_attributes }
+        end.not_to change(Photo, :count)
+        expect(response).to redirect_to(album_path(album))
+        expect(assigns(:photo)).to be_a_new(Photo)
+        expect(response).to redirect_to(album_path(album))
       end
-
-      it { expect(assigns(:photo)).to be_a_new(Photo) }
-      it { expect(response).to redirect_to(album_path(album)) }
     end
   end
 
   describe '#destroy' do
     context 'when logged in' do
-      subject { delete :destroy, id: photo.to_param }
 
-      it { expect{subject}.to change(Photo, :count).by(-1) }
 
       it do
-        subject
+        expect do
+          delete :destroy, params: { id: photo.to_param }
+        end.to change(Photo, :count).by(-1)
         expect(response).to redirect_to(album_url(album))
       end
     end

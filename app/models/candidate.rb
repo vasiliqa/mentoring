@@ -54,22 +54,24 @@
 #  russian_citizenship      :boolean
 #
 
-class Candidate < ActiveRecord::Base
+class Candidate < ApplicationRecord
   include AASM
 
-  has_many :candidate_educations
-  has_many :candidate_family_members
-  has_many :candidate_children_experiences
+  has_many :candidate_educations, dependent: :destroy, inverse_of: :candidate
+  has_many :candidate_family_members, dependent: :destroy, inverse_of: :candidate
+  has_many :candidate_children_experiences, dependent: :destroy, inverse_of: :candidate
   accepts_nested_attributes_for :candidate_educations
   accepts_nested_attributes_for :candidate_family_members
   accepts_nested_attributes_for :candidate_children_experiences
 
-  validates_presence_of :first_name, :last_name, :middle_name, :registration_address, :home_address, :phone_number,
-                        :email, :birth_date, :confession, :health_status, :serious_diseases, :organization_name, :work_contacts, :work_position, :work_functions, :work_schedule, :hobby,
-                        :martial_status, :program_role,
-                        :program_reason, :person_character, :person_information, :help_reason, :child_age, :child_gender,
-                        :child_character, :visit_frequency, :alcohol, :tobacco, :psychoactive, :drugs,
-                        :child_crime, :disabled_parental_rights, :info_about_program
+  validates_presence_of :first_name, :last_name, :middle_name, :registration_address, :home_address,
+                        :phone_number, :email, :birth_date, :confession, :health_status,
+                        :serious_diseases, :organization_name, :work_contacts, :work_position,
+                        :work_functions, :work_schedule, :hobby, :martial_status, :program_role,
+                        :program_reason, :person_character, :person_information, :help_reason,
+                        :child_age, :child_gender, :child_character, :visit_frequency, :alcohol,
+                        :tobacco, :psychoactive, :drugs, :child_crime, :disabled_parental_rights,
+                        :info_about_program
 
   validates_inclusion_of :invalid_child, :reports, :photo_rights, :russian_citizenship, in: [true, false]
   validates :email, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/ }, uniqueness: { case_sensitive: false }

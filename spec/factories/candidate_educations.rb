@@ -13,13 +13,13 @@
 #  updated_at   :datetime         not null
 #
 
-FactoryGirl.define do
-  factory :candidate_education do
-    education "Средне-высшее"
-    start_date  6.years.ago
-    end_date 1.years.ago
-    institution "НГУ"
-    specialty "Специальность"
-  end
-
+FactoryBot.define do
+  # factory :candidate_education do
+  #   education "Средне-высшее"
+  #   start_date  6.years.ago
+  #   end_date 1.years.ago
+  #   institution "НГУ"
+  #   specialty "Специальность"
+  #   candidate
+  # end
 end

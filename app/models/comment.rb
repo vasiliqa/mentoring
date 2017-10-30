@@ -11,10 +11,9 @@
 #  updated_at       :datetime         not null
 #
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :commentable, polymorphic: true
 
   validates :text, presence: true, length: { in: 3..141 }
-  validates :commentable, presence: true
 end

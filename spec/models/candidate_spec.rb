@@ -56,7 +56,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Candidate, :type => :model do
+RSpec.describe Candidate, type: :model do
   let(:candidate) { create :candidate, email: 'test_candidate_email@example.com' }
   let(:user) { create :user, email: "jojo@yahoo.com"}
 

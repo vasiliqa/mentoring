@@ -63,10 +63,10 @@ class CandidatesController < ApplicationController
                     :psychoactive, :drugs, :child_crime, :disabled_parental_rights, :reports, :photo_rights,
                     :info_about_program,
                     candidate_educations_attributes:
-                        [:education, :start_date, :end_date, :institution, :specialty],
+                        [:id, :education, :start_date, :end_date, :institution, :specialty, :_destroy],
                     candidate_family_members_attributes:
-                        [:name, :gender, :age, :relation],
+                        [:id, :name, :gender, :age, :relation, :_destroy],
                     candidate_children_experiences_attributes:
-                        [:organization_name, :organization_contacts, :position, :functions, :children_age])
+                        [:id, :organization_name, :organization_contacts, :position, :functions, :children_age, :_destroy])
     end
 end

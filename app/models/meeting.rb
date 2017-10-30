@@ -11,7 +11,7 @@
 #  updated_at :datetime         not null
 #
 
-class Meeting < ActiveRecord::Base
+class Meeting < ApplicationRecord
   belongs_to :child
   belongs_to :mentor, foreign_key: :mentor_id, class_name: 'User'
   has_one :report
@@ -21,8 +21,6 @@ class Meeting < ActiveRecord::Base
   include PublicActivity::Model
   tracked only: [:create], owner: :mentor
 
-  validates :child, presence: true
-  validates :mentor_id, presence: true
   validates :date, presence: true
 
   aasm column: :state, whiny_transitions: false do

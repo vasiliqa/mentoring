@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :meetings do
+  resources :meetings, except: [:edit, :update] do
     member do
       get :reject
       get :reopen

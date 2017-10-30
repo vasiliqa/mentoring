@@ -14,7 +14,7 @@
 #  updated_at        :datetime         not null
 #
 
-class Book < ActiveRecord::Base
+class Book < ApplicationRecord
   belongs_to :owner, foreign_key: :owner_id, class_name: 'User'
   has_many :comments, as: :commentable
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
@@ -29,6 +29,4 @@ class Book < ActiveRecord::Base
   do_not_validate_attachment_file_type :file
 
   validates :name, presence: true
-  validates :owner, presence: true
-
 end

@@ -12,6 +12,6 @@
 #  updated_at   :datetime         not null
 #
 
-class CandidateFamilyMember < ActiveRecord::Base
+class CandidateFamilyMember < ApplicationRecord
   belongs_to :candidate
 end

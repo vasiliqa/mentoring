@@ -17,7 +17,7 @@
 #  other_comments    :text
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :report do
     duration 2
     aim 'aim'
