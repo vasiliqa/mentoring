@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030162647) do
+ActiveRecord::Schema.define(version: 20171030173402) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,8 +68,6 @@ ActiveRecord::Schema.define(version: 20171030162647) do
   create_table "candidate_educations", id: :serial, force: :cascade do |t|
     t.integer "candidate_id"
     t.string "education"
-    t.date "start_date"
-    t.date "end_date"
     t.string "specialty"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -100,8 +98,6 @@ ActiveRecord::Schema.define(version: 20171030162647) do
     t.string "confession"
     t.string "health_status"
     t.string "serious_diseases"
-    t.date "work_start_date"
-    t.date "work_end_date"
     t.string "organization_name"
     t.string "work_contacts"
     t.string "work_position"
@@ -109,11 +105,6 @@ ActiveRecord::Schema.define(version: 20171030162647) do
     t.string "work_schedule"
     t.text "hobby"
     t.string "martial_status"
-    t.string "house_type"
-    t.string "number_of_rooms"
-    t.string "peoples_for_room"
-    t.text "peoples"
-    t.string "pets"
     t.string "program_role"
     t.text "program_reason"
     t.text "person_character"

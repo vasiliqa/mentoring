@@ -14,8 +14,6 @@
 #  confession               :string
 #  health_status            :string
 #  serious_diseases         :string
-#  work_start_date          :date
-#  work_end_date            :date
 #  organization_name        :string
 #  work_contacts            :string
 #  work_position            :string
@@ -23,11 +21,6 @@
 #  work_schedule            :string
 #  hobby                    :text
 #  martial_status           :string
-#  house_type               :string
-#  number_of_rooms          :string
-#  peoples_for_room         :string
-#  peoples                  :text
-#  pets                     :string
 #  program_role             :string
 #  program_reason           :text
 #  person_character         :text
@@ -70,8 +63,6 @@ FactoryBot.define do
     health_status "ok"
     serious_diseases "no"
 
-    work_start_date 10.years.ago
-    work_end_date nil
     organization_name "Al'Kaida"
     work_contacts "911"
     work_position "Leader"
@@ -81,12 +72,6 @@ FactoryBot.define do
     hobby "Exploding"
 
     martial_status "married"
-
-    house_type "House"
-    number_of_rooms "22"
-    peoples_for_room "1"
-    peoples "22"
-    pets "yes, one bear"
 
     program_role "Mentor"
     program_reason "Because i can"

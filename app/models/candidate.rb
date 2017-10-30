@@ -14,8 +14,6 @@
 #  confession               :string
 #  health_status            :string
 #  serious_diseases         :string
-#  work_start_date          :date
-#  work_end_date            :date
 #  organization_name        :string
 #  work_contacts            :string
 #  work_position            :string
@@ -23,11 +21,6 @@
 #  work_schedule            :string
 #  hobby                    :text
 #  martial_status           :string
-#  house_type               :string
-#  number_of_rooms          :string
-#  peoples_for_room         :string
-#  peoples                  :text
-#  pets                     :string
 #  program_role             :string
 #  program_reason           :text
 #  person_character         :text
@@ -75,14 +68,12 @@ class Candidate < ApplicationRecord
 
   validates_inclusion_of :invalid_child, :reports, :photo_rights, :russian_citizenship, in: [true, false]
   validates :email, format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/ }, uniqueness: { case_sensitive: false }
-  # validates :number_of_rooms, numericality: { greater_than_or_equal_to: 1 }
 
   HEALTH_STATUSES = ['отлично', 'хорошо', 'средне', 'плохо']
   GENDERS = ['Мужской', 'Женский']
   CHILD_GENDERS = ['Мужской', 'Женский', 'Не имеет значения']
   EDUCATION_TYPES = ['Общеобразовательная школа', 'Университет, Институт, техникум', 'Дополнительные курсы, тренинги, семинары']
   MARTIAL_STATUSES = ['Женат (замужем)', 'Гражданский брак', 'Разведён (разведена)', 'Вдовец (вдова)', 'Не женат (не замужем)']
-  HOUSE_TYPES = ['Квартира', 'Частный дом', 'Арендованное жильё']
   PROGRAM_ROLES = ['Наставника', 'Волонтёра', 'Партнёра (оказывать единоразовую/постоянную финансовую поддержку)']
 
   aasm column: :state, whiny_transitions: false do
