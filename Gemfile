@@ -39,7 +39,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
   gem 'capistrano3-unicorn', require: false
-  gem 'mailcatcher'
   gem 'spring'
 end
 
