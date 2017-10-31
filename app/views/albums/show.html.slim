@@ -35,7 +35,3 @@ p#alert = alert
               = image_tag photo.image.url(:original, false), class: 'ui image'
 
 == render 'back'
-
-- if can? :edit, @album
-  coffee:
-    new @Filedropzone('.dropzone')

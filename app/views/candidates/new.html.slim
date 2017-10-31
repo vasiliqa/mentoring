@@ -274,7 +274,7 @@
       = f.submit 'Отправить анкету', class: 'ui green button', id: 'submit_button', disabled: true
 
 coffee:
-  $(document).ready ->
+  $(document).on 'turbolinks:load', ->
     $('#agreement').on 'change', ->
       if $(this)[0].checked && $('#personal_data')[0].checked
         $('#submit_button')[0].disabled = false
