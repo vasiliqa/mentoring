@@ -1,9 +1,10 @@
 Given /^a meeting to "(.+)" and user "(.+)" at yesterday$/ do |child_name, email|
-  Meeting.create! do |meeting|
-    meeting.date = DateTime.yesterday
+  meeting = Meeting.create! do |meeting|
+    meeting.date = 1.day.since
     meeting.child_id = Child.find_by_first_name(child_name).id
     meeting.mentor_id = User.find_by_email(email).id
   end
+  meeting.update(date: 1.day.before)
 end
 
 Then /^I should meeting's action "(.+)" visible only meeting at yesterday$/ do |action_name|
@@ -28,10 +29,11 @@ end
 
 Given /^meeting to "(.+)" and user "(.+)" at yesterday on state "report_sent"$/ do |child_name, email|
   meeting = Meeting.create! do |m|
-    m.date = DateTime.yesterday
+    m.date = 1.day.since
     m.child_id = Child.find_by_first_name(child_name).id
     m.mentor_id = User.find_by_email(email).id
   end
+  meeting.update(date: 1.day.before)
 
   Report.create! do |report|
     report.meeting_id = meeting.id

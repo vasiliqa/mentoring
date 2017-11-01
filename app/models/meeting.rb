@@ -26,6 +26,10 @@ class Meeting < ApplicationRecord
   tracked only: [:create], owner: :mentor
 
   validates :date, presence: true
+  validate :date_in_future, on: :create
+  def date_in_future
+    errors.add(:base, 'Дата встречи не может быть в прошлом') if date.present? && date < Time.zone.now
+  end
 
   aasm column: :state, whiny_transitions: false do
     state :new, initial: true

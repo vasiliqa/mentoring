@@ -17,7 +17,7 @@
 
 FactoryBot.define do
   factory :meeting do
-    date DateTime.tomorrow
+    date 1.day.since
     state 'new'
     child_id 1
     mentor_id 2

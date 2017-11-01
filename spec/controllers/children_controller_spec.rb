@@ -12,6 +12,7 @@ RSpec.describe ChildrenController, type: :controller do
       first_name: 'Adolf',
       last_name: 'Hitler',
       middle_name: 'Shickle',
+      birthdate: 15.years.before,
       orphanage_id: orphanage.id,
       mentor_id: mentor.id
     }

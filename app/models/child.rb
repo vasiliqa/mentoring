@@ -32,7 +32,7 @@ class Child < ApplicationRecord
   validates_attachment_size :avatar, less_than: 1.megabytes
   validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png image/gif)
 
-  validates :first_name, :last_name, presence: true
+  validates :first_name, :last_name, :birthdate, presence: true
 
   scope :want_to_be_friends, -> { where(is_friendly: true) }
 
