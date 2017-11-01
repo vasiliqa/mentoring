@@ -16,14 +16,14 @@ ActiveRecord::Schema.define(version: 20171030173402) do
   enable_extension "plpgsql"
 
   create_table "activities", id: :serial, force: :cascade do |t|
-    t.integer "trackable_id"
     t.string "trackable_type"
-    t.integer "owner_id"
+    t.integer "trackable_id"
     t.string "owner_type"
+    t.integer "owner_id"
     t.string "key"
     t.text "parameters"
-    t.integer "recipient_id"
     t.string "recipient_type"
+    t.integer "recipient_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type"
@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(version: 20171030173402) do
   create_table "comments", id: :serial, force: :cascade do |t|
     t.text "text"
     t.integer "user_id"
-    t.integer "commentable_id"
     t.string "commentable_type"
+    t.integer "commentable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id"
@@ -161,8 +161,8 @@ ActiveRecord::Schema.define(version: 20171030173402) do
   end
 
   create_table "mailboxer_conversation_opt_outs", id: :serial, force: :cascade do |t|
-    t.integer "unsubscriber_id"
     t.string "unsubscriber_type"
+    t.integer "unsubscriber_id"
     t.integer "conversation_id"
     t.index ["conversation_id"], name: "index_mailboxer_conversation_opt_outs_on_conversation_id"
     t.index ["unsubscriber_id", "unsubscriber_type"], name: "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type"
@@ -178,13 +178,13 @@ ActiveRecord::Schema.define(version: 20171030173402) do
     t.string "type"
     t.text "body"
     t.string "subject", default: ""
-    t.integer "sender_id"
     t.string "sender_type"
+    t.integer "sender_id"
     t.integer "conversation_id"
     t.boolean "draft", default: false
     t.string "notification_code"
-    t.integer "notified_object_id"
     t.string "notified_object_type"
+    t.integer "notified_object_id"
     t.string "attachment"
     t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
@@ -197,8 +197,8 @@ ActiveRecord::Schema.define(version: 20171030173402) do
   end
 
   create_table "mailboxer_receipts", id: :serial, force: :cascade do |t|
-    t.integer "receiver_id"
     t.string "receiver_type"
+    t.integer "receiver_id"
     t.integer "notification_id", null: false
     t.boolean "is_read", default: false
     t.boolean "trashed", default: false
@@ -259,8 +259,8 @@ ActiveRecord::Schema.define(version: 20171030173402) do
 
   create_table "roles", id: :serial, force: :cascade do |t|
     t.string "name"
-    t.integer "resource_id"
     t.string "resource_type"
+    t.integer "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
