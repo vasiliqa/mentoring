@@ -12,25 +12,24 @@ p#alert = alert
           i.icon.add
           | Добавить новый альбом
 
-  .row
-    .ui.items
-      - if @albums.blank?
+  .ui.items
+    - if @albums.blank?
+      .item
+        .image
+        .content
+          .meta
+            | Нет данных для отображения
+    - else
+      - @albums.each do |album|
         .item
           .image
+            - if album.photos.blank?
+              = image_tag 'image.png', class: 'ui image small'
+            - else
+              = image_tag album.photos.last.image.url(:original, false), class: 'ui image small'
           .content
-            .meta
-              | Нет данных для отображения
-      - else
-        - @albums.each do |album|
-          .item
-            .image
-              - if album.photos.blank?
-                = image_tag 'image.png', class: 'ui image small'
-              - else
-                = image_tag album.photos.last.image.url(:original, false), class: 'ui image small'
-            .content
-              = link_to album.title, album, class: 'header'
-              .description
-                = album.description
-              .extra
-                = album.user.email
+            = link_to album.title, album, class: 'header'
+            .description
+              = album.description
+            .extra
+              = album.user.email

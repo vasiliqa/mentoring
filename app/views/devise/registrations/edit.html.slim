@@ -8,11 +8,8 @@
       .field
         .ui.left.icon.input
           i.lock.icon
-          - if @minimum_password_length
-            em
-              | Минимальное количество символов:
-              = @minimum_password_length
           = f.password_field :password, autofocus: true, autocomplete: 'off', placeholder: 'Новый пароль'
+        small.helper Минимальное количество символов: #{@minimum_password_length}
 
       .field
         .ui.left.icon.input
@@ -25,8 +22,5 @@
           i.lock.icon
           br
           = f.password_field :current_password, autocomplete: 'off', placeholder: 'Текущий пароль'
-
-
       = f.submit 'Сменить мой пароль', class: 'ui field fluid large green submit button'
-
-  = render 'devise/shared/links'
+  = link_to 'Вернуться', user_path(current_user)
