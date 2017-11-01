@@ -27,7 +27,7 @@ class ReportsController < ApplicationController
     @report.state = :new
     if @report.save
       redirect_to Meeting, notice: 'Отчёт был успешно создан.'
-      ReportsMailer.new_report(@report).deliver_now
+      ReportsMailer.new_report(@report).deliver_now if @report.meeting.mentor.curator
     else
       render :new, notice: 'Не удалось создать отчёт.'
     end

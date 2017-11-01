@@ -1,6 +1,6 @@
 Feature: Meetings
   In order to allow users with role "mentor" create meeting on a date
-  and allow users with role "psych" read and deprecate meetings of his subordinates
+  and allow users with role "curator" read and deprecate meetings of his subordinates
 
 
   Background:
@@ -43,7 +43,7 @@ Feature: Meetings
      When I go to "/meetings"
      Then I should see only 2 meetings to "Stalin", "Lenin"
 
-  Scenario:  Psych reject meeting
+  Scenario: A curator reject meeting
     Given a meeting to "Stalin" and user "mentor@example.com" at tomorrow
       And I signed in as user with email: "psych@example.com"
      When I go to "/meetings"
