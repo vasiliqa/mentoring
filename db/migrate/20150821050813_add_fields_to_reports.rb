@@ -1,4 +1,4 @@
-class AddFieldsToReports < ActiveRecord::Migration
+class AddFieldsToReports < ActiveRecord::Migration[4.2]
   def change
     rename_column :reports, :text, :aim
     add_column :reports, :duration, :integer

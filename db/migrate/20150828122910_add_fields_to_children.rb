@@ -1,4 +1,4 @@
-class AddFieldsToChildren < ActiveRecord::Migration
+class AddFieldsToChildren < ActiveRecord::Migration[4.2]
   def change
     add_reference :children, :photo, index: true
     add_foreign_key :children, :photos

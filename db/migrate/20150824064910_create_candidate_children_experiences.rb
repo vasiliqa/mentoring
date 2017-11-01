@@ -1,4 +1,4 @@
-class CreateCandidateChildrenExperiences < ActiveRecord::Migration
+class CreateCandidateChildrenExperiences < ActiveRecord::Migration[4.2]
   def change
     create_table :candidate_children_experiences do |t|
       t.belongs_to :candidate, index: true

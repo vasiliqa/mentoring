@@ -1,4 +1,4 @@
-class CreateCandidateFamilyMembers < ActiveRecord::Migration
+class CreateCandidateFamilyMembers < ActiveRecord::Migration[4.2]
   def change
     create_table :candidate_family_members do |t|
       t.belongs_to :candidate, index: true
