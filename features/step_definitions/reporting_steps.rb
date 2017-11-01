@@ -9,7 +9,7 @@ end
 
 Then /^I should meeting's action "(.+)" visible only meeting at yesterday$/ do |action_name|
   page.all('table tbody tr').each do |row|
-    if row.has_content?(Date.yesterday)
+    if row.has_content?(1.day.since.to_date)
       expect(row).to have_selector(:link_or_button, action_name)
     else
       expect(row).to_not have_button(:link_or_button, action_name)
