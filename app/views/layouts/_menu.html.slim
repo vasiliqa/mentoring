@@ -30,11 +30,6 @@
       i.icon.mail
       | Сообщения
 
-  - if user_signed_in?
-    = link_to main_app.forem_path, class: 'item' do
-      i.icon.users
-      | Форум
-
   - if user_signed_in? && @main_ability.can?(:read, Book)
     = link_to main_app.books_path, class: 'item' do
       i.icon.book

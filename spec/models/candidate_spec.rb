@@ -14,8 +14,6 @@
 #  confession               :string
 #  health_status            :string
 #  serious_diseases         :string
-#  work_start_date          :date
-#  work_end_date            :date
 #  organization_name        :string
 #  work_contacts            :string
 #  work_position            :string
@@ -23,11 +21,6 @@
 #  work_schedule            :string
 #  hobby                    :text
 #  martial_status           :string
-#  house_type               :string
-#  number_of_rooms          :string
-#  peoples_for_room         :string
-#  peoples                  :text
-#  pets                     :string
 #  program_role             :string
 #  program_reason           :text
 #  person_character         :text
@@ -56,7 +49,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Candidate, :type => :model do
+RSpec.describe Candidate, type: :model do
   let(:candidate) { create :candidate, email: 'test_candidate_email@example.com' }
   let(:user) { create :user, email: "jojo@yahoo.com"}
 

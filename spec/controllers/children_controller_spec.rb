@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe ChildrenController, :type => :controller do
+RSpec.describe ChildrenController, type: :controller do
+  render_views
 
   let! (:orphanage) { create :orphanage}
   let! (:admin) { create :user, :admin, orphanage_id: orphanage.id }
@@ -11,6 +12,7 @@ RSpec.describe ChildrenController, :type => :controller do
       first_name: 'Adolf',
       last_name: 'Hitler',
       middle_name: 'Shickle',
+      birthdate: 15.years.before,
       orphanage_id: orphanage.id,
       mentor_id: mentor.id
     }
@@ -29,16 +31,18 @@ RSpec.describe ChildrenController, :type => :controller do
   describe "GET index" do
     it "assigns all children as @children" do
       child = Child.create! valid_attributes
-      get :index, {}
+      get :index
       expect(assigns(:children)).to eq([child])
+      expect(response.status).to eq(200)
     end
   end
 
   describe "GET show" do
     it "assigns the requested child as @child" do
       child = Child.create! valid_attributes
-      get :show, {:id => child.to_param}
+      get :show, params: { id: child.to_param }
       expect(assigns(:child)).to eq(child)
+      expect(response.status).to eq(200)
     end
   end
 
@@ -46,45 +50,37 @@ RSpec.describe ChildrenController, :type => :controller do
     it "assigns a new child as @child" do
       get :new
       expect(assigns(:child)).to be_a_new(Child)
+      expect(response.status).to eq(200)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested child as @child" do
       child = Child.create! valid_attributes
-      get :edit, {:id => child.to_param}
+      get :edit, params: { id: child.to_param }
       expect(assigns(:child)).to eq(child)
+      expect(response.status).to eq(200)
     end
   end
 
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Child" do
-        expect {
-          post :create, {:child => valid_attributes}
-        }.to change(Child, :count).by(1)
-      end
-
-      it "assigns a newly created child as @child" do
-        post :create, {:child => valid_attributes}
+        expect do
+          post :create, params: { child: valid_attributes }
+        end.to change(Child, :count).by(1)
         expect(assigns(:child)).to be_a(Child)
         expect(assigns(:child)).to be_persisted
-      end
-
-      it "redirects to the created child" do
-        post :create, {:child => valid_attributes}
         expect(response).to redirect_to(Child.last)
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved child as @child" do
-        post :create, {:child => invalid_attributes}
+      it "does not create a new Child" do
+        expect do
+          post :create, params: {child: invalid_attributes}
+        end.not_to change(Child, :count)
         expect(assigns(:child)).to be_a_new(Child)
-      end
-
-      it "re-renders the 'new' template" do
-        post :create, {:child => invalid_attributes}
         expect(response).to render_template("new")
       end
     end
@@ -92,29 +88,26 @@ RSpec.describe ChildrenController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) do
-        {
-            first_name: 'Kastro'
-        }
-      end
+      let(:new_attributes) { { first_name: 'Kastro' } }
 
       it "updates the requested child" do
         child = Child.create! valid_attributes
-        put :update, {:id => child.to_param, :child => new_attributes}
+        put :update, params: { id: child.to_param, child: new_attributes }
         child.reload
         expect(child.first_name).to eq('Kastro')
-      end
-
-      it "assigns the requested child as @child" do
-        child = Child.create! valid_attributes
-        put :update, {:id => child.to_param, :child => valid_attributes}
         expect(assigns(:child)).to eq(child)
-      end
-
-      it "redirects to the child" do
-        child = Child.create! valid_attributes
-        put :update, {:id => child.to_param, :child => valid_attributes}
         expect(response).to redirect_to(child)
+      end
+    end
+
+    describe "with invalid params" do
+      it "does not update the requested child" do
+        child = Child.create! valid_attributes
+        put :update, params: { id: child.to_param, child: { first_name: nil } }
+        child.reload
+        expect(child.first_name).to eq('Adolf')
+        expect(assigns(:child)).to eq(child)
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -122,16 +115,10 @@ RSpec.describe ChildrenController, :type => :controller do
   describe "DELETE destroy" do
     it "destroys the requested child" do
       child = Child.create! valid_attributes
-      expect {
-        delete :destroy, {:id => child.to_param}
-      }.to change(Child, :count).by(-1)
-    end
-
-    it "redirects to the children list" do
-      child = Child.create! valid_attributes
-      delete :destroy, {:id => child.to_param}
+      expect do
+        delete :destroy, params: { id: child.to_param }
+      end.to change(Child, :count).by(-1)
       expect(response).to redirect_to(children_url)
     end
   end
-
 end

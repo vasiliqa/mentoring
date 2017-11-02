@@ -1,7 +1,7 @@
 Feature: Photos
   Section is a repository of photos from events or meetings with children. Photos can be downloaded by users in formats
   jpeg, jpg, png, gif, bmp. Loading should be possible both in one picture with the addition of the specification and
-  the album with the addition of the album title. After downloading the photos are visible for users c roles of mentor,
+  the album with the addition of the album title. After downloading the photos are visible for users with roles of mentor,
   curator, employee of the children's home, as well as open the possibility commenting photos.
 
   Background:

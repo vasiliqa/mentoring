@@ -89,15 +89,6 @@ p#alert = flash[:error]
                 strong Образование:
                 br
                 = education.education
-            /.row
-              .column.six.wide
-                strong C:
-                br
-                = education.start_date
-              .column.six.wide
-                strong До:
-                br
-                = education.end_date
             .row
               .column
                 strong Учебное заведение:
@@ -114,15 +105,6 @@ p#alert = flash[:error]
 
     .ui.segment
       .ui.grid
-        /.row
-          .column.six.wide
-            strong C:
-            br
-            = @candidate.work_start_date
-          .column.six.wide
-            strong До:
-            br
-            = @candidate.work_end_date
         .row
           .column
             strong Название организации:
@@ -191,36 +173,6 @@ p#alert = flash[:error]
                       strong Кем приходится:
                       br
                       = member.relation
-
-  /.ui.segment
-    h3.ui.header 7. Жилищно-бытовые условия:
-
-    .ui.segment
-      .ui.grid
-        .row
-          .column.four.wide
-            strong Тип жилья:
-            br
-            = @candidate.house_type
-          .column.four.wide
-            strong Количество комнат:
-            br
-            = @candidate.number_of_rooms
-          .column.four.wide
-            strong Проживает в одной комнате:
-            br
-            = @candidate.peoples_for_room
-        .row
-          .column
-            strong Информация о других членах семьи:
-            br
-            = @candidate.peoples
-        .row
-          .column
-            strong Домашние животные:
-            br
-            = @candidate.pets
-
   .ui.segment
     h3.ui.header 7. Опыт работы с детьми:
 

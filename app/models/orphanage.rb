@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class Orphanage < ActiveRecord::Base
+class Orphanage < ApplicationRecord
   has_many :children, dependent: :destroy
   has_many :users
 

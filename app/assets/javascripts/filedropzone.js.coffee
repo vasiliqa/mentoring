@@ -1,17 +1,21 @@
-class @Filedropzone
-  constructor: (selector) ->
-    $(document).ready ->
-      Dropzone.autoDiscover = false
+$(document).on 'turbolinks:load', ->
+  return unless $('.dropzone').length > 0
 
-      dropzone = new Dropzone selector,
-        maxFilesize: 16
-        paramName: 'photo[image]'
-        addRemoveLinks: false
-        acceptedFiles: 'image/*'
-        dictDefaultMessage: 'Перетащите сюда файл для загрузки в альбом'
+  Dropzone.autoDiscover = false
 
-      dropzone.on 'success', (file) ->
+  if $('.dropzone')[0].dropzone
+    $('.dropzone')[0].dropzone.destroy()
+
+  $('.dropzone').dropzone
+    maxFilesize: 16
+    paramName: 'photo[image]'
+    addRemoveLinks: false
+    acceptedFiles: 'image/*'
+    dictDefaultMessage: 'Для загрузки в альбом перетащите сюда файл или нажмите здесь',
+    dictFileTooBig: 'Максимальный размер файла 16Мб'
+    init: ->
+      $('.dz-message').html(this.options.dictDefaultMessage)
+      this.on 'success', (file) ->
         this.removeFile file
-
-      dropzone.on 'queuecomplete', ->
+      this.on 'queuecomplete', ->
         location.reload true

@@ -1,79 +1,65 @@
 source 'https://rubygems.org'
 
-# rails
-gem 'rails', '~>4.2.0'
-
-# postgresql adapter
+gem 'rails', '5.1.4'
 gem 'pg'
 
-# preprocessors
-gem 'sass-rails', '~> 5.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'slim-rails'
-gem 'jbuilder', '~> 2.0'
-
-# assets
-gem 'jquery-rails'
-gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-gem 'jquery-datetimepicker-rails'
-gem 'dropzonejs-rails'
-gem 'bxslider-rails', '~> 4.2', '>= 4.2.5.1'
-
-# turbolinks
-gem 'turbolinks'
-
-# logic
-gem 'devise'
-gem 'cancancan'
-gem 'rolify'
 gem 'aasm'
-gem 'paperclip', '~> 4.3.0'
-gem 'mailboxer'
-gem 'public_activity'
-gem 'rails_admin', '~> 0.7.0'
-
-# jobs
-gem 'sidekiq'
-
-# other
-gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'annotate'
 gem 'active_link_to'
-gem 'cocoon', '~> 1.2.6'
+gem 'bxslider-rails'
+gem 'cancancan'
+gem 'celluloid'
+gem 'cocoon'
+gem 'coffee-rails'
+gem 'devise'
+gem 'dropzonejs-rails'
+gem 'jbuilder'
+gem 'jquery-datetimepicker-rails'
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
+gem 'kaminari'
+gem 'mailboxer'
+gem 'paperclip'
+gem 'public_activity'
+gem 'puma'
+gem 'rails_admin'
+gem 'rolify'
+gem 'sass-rails'
+gem 'sdoc', group: :doc
+gem 'semantic-ui-sass'
+gem 'sidekiq'
+gem 'slim-rails'
+gem 'turbolinks'
+gem 'uglifier'
 
-# forum
-gem 'forem', github: 'radar/forem', branch: 'rails4'
-gem 'kaminari', '0.15.1'
-gem 'celluloid', '0.16.0'
-
-group :development, :test do
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-
-  gem 'net-ssh'
-  gem 'quiet_assets'
-  gem 'capistrano', '~> 3.4.0'
-  gem 'capistrano-rvm'
+group :development do
+  gem 'annotate'
+  gem 'awesome_print'
+  gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   gem 'capistrano-sidekiq'
   gem 'capistrano3-unicorn', require: false
+  gem 'spring'
+end
 
-  gem 'capybara', '~> 2.3.0'
-  gem 'rspec-rails', '~> 3.0.0'
+group :development, :test do
+  gem 'factory_bot_rails', require: false
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'rspec-rails'
   gem 'rspec-mocks'
-  gem 'factory_girl_rails', require: false
-  gem 'database_cleaner'
-  gem 'cucumber-rails', require: false
-  gem 'selenium-webdriver'
-  gem 'rack'
+end
+
+group :test do
+  gem 'capybara'
   gem 'coveralls', require: false
-  gem 'simplecov', require: false
+  gem 'cucumber-rails', require: false
+  gem 'database_cleaner'
   gem 'email_spec'
-  gem 'delorean'
-  gem 'mailcatcher'
+  gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
+  gem 'simplecov', require: false
 end
 
 group :production do

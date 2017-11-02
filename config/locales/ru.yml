@@ -287,8 +287,30 @@ ru:
       short: "%d %b, %H:%M"
     pm: вечера
 
+  attributes:
+    created_at: Создан
+    updated_at: Обновлен
+    candidate: Кандидат
+    user: Пользователь
+    comments: Комментарии
+    email: Электронный адрес
+    last_name: Фамилия
+    first_name: Имя
+    middle_name: Отчество
+    description: Описание
+    avatar: Аватар
+    meetings: Встречи
+    photos: Фотографии
+    orphanage: Учреждение
+    mentor: Наставник
+    children: Дети
+    users: Пользователи
   activerecord:
     models:
+      candidate: Кандидат
+      candidate_children_experience: Опыт с детьми
+      candidate_education: Образование
+      candidate_family_member: Члены семьи
       orphanage: Учреждение
       user: Пользователь
       child: Ребёнок
@@ -301,14 +323,92 @@ ru:
       activity: Событие
       role: Роль
     attributes:
+      candidate:
+        registration_address: Адрес регистрации
+        home_address: Адрес фактического проживания
+        phone_number: Контактный телефон
+        email: Электронный адрес
+        birth_date: Дата рождения
+        confession: Вероисповедание
+        health_status: Состояние здоровья
+        serious_diseases: Серьёзные заболевания
+        organization_name: Место работы
+        work_contacts: Контактная информация (работа)
+        work_position: Должность
+        work_functions: Обязанности
+        work_schedule: Рабочий график
+        hobby: Хобби
+        martial_status: Семейное положение
+        program_role: Участие в программе в качестве
+        program_reason: Причины участия в программе
+        person_character: Полезные качества характера
+        person_information: Описание себя
+        help_reason: Причины для помощи сиротам
+        child_age: Возраст детей
+        child_gender: Пол детей
+        child_character: Важен ли характер
+        visit_frequency: Частота визитов
+        invalid_child: Работа с детьми с ограниченными возможностями
+        alcohol: Употребление алкоголя
+        tobacco: Употребление табачных изделий
+        psychoactive: Употребление психотропных веществ
+        drugs: Употребление наркотиков
+        child_crime: Совершение преступлений
+        disabled_parental_rights: Лишение родительских прав
+        reports: Согласие на написание отчётов
+        photo_rights: Разрешение на использование фото
+        info_about_program: Откуда узнали о программе
+        state: Статус
+        state/new: новый
+        state/approved: одобрен
+        state_comment: Комментарий к статусу
+        russian_citizenship: Гражданство РФ
+        candidate_educations: Образование
+        candidate_children_experiences: Опыт с детьми
+        candidate_family_members: Члены семьи
+      candidate_children_experience:
+        organization_name: Название организации
+        organization_contacts: Контактная информация
+        position: Должность
+        functions: Обязанности
+        children_age: Возраст детей
+      candidate_education:
+        education: Образование
+        specialty: Специальность
+        institution: Учебное заведение
+      candidate_family_member:
+        name: Имя
+        gender: Пол
+        age: Возраст
+        relation: Родственная связь
       user:
         password: Пароль
         current_password: Текущий пароль
         password_confirmation: Подтверждение пароля
+        reset_password_sent_at: Сброс пароля отправлен
+        remember_created_at: Логин сохранен
+        sign_in_count: Количество входов на сайт
+        current_sign_in_at: Текущий вход
+        last_sign_in_at: Последний вход
+        current_sign_in_ip: IP текущего входа
+        last_sign_in_ip: IP последнего входа
+        curator: Куратор
+        subordinates: Подчинённые
+        books: Книги
+        albums: Альбомы
+        messages: Сообщения
+        receipts: Уведомления
+        roles: Роли
+      child:
+        birthdate: Дата рождения
+        is_friendly: Хочет дружить
+      orphanage:
+        name: Название
+        address: Адрес
       meeting:
+        report: Отчёт
         date: Дата
         child: Ребёнок
-        mentor: Наставник
         state: Статус
         state/new: новый
         state/rejected: отклонён
@@ -328,25 +428,29 @@ ru:
         state/new: новый
         state/rejected: отклонён
         state/approved: одобрен
+        meeting: Встреча
       book:
         name: Название
         priority: Приоритет
         priority/interesting: Это интересно
         priority/must_read: Обязательно к прочтению
         priority/immediately_read: Срочно прочесть
+        owner: Владелец
+        file: Файл
       album:
         title: Название
-        description: Описание
-      candidate:
-        state: Статус
-        state/new: новый
-        state/approved: одобрен
+      photo:
+        image: Фото
+        album: Альбом
       role:
         name: Название
         name/admin: Администратор
         name/curator: Психолог
         name/mentor: Наставник
         name/employee: Сотрудник детского дома
+      comment:
+        text: Текст
+        commentable: Прокомментировано
 
     errors:
       models:
@@ -360,12 +464,9 @@ ru:
               invalid: имеет неверное значение
             password_confirmation:
               confirmation: не совпадает со значением поля %{attribute}
-
-  simple_form:
-    labels:
-      category:
-        position: Позиция
-      forum:
-        position: Позиция
+        meeting:
+          attributes:
+            child:
+              required: должен быть выбран для назначения встречи
   by: от
   started_by: "Автор: "

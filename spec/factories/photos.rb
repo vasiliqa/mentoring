@@ -13,8 +13,13 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_photos_on_album_id  (album_id)
+#  index_photos_on_user_id   (user_id)
+#
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :photo do
     description "MyText"
     image Rack::Test::UploadedFile.new("#{Rails.root}/app/assets/images/image.png", 'image/png')

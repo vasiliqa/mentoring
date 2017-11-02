@@ -13,8 +13,13 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_photos_on_album_id  (album_id)
+#  index_photos_on_user_id   (user_id)
+#
 
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   belongs_to :album
   belongs_to :user
   has_many :comments, as: :commentable
@@ -28,8 +33,5 @@ class Photo < ActiveRecord::Base
   validates_attachment_size :image, less_than: 16.megabytes
   validates_attachment_content_type :image, content_type: %w(image/jpeg image/jpg image/png image/gif image/bmp)
 
-  validates :user, presence: true
-
   scope :persisted, -> { where 'id IS NOT NULL' }
-
 end

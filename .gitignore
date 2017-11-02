@@ -15,6 +15,5 @@
 .idea
 /coverage/*
 
-/db/schema.rb
-
 *.rdb
+TODO.txt

@@ -18,18 +18,21 @@
 #  avatar_file_size    :integer
 #  avatar_updated_at   :datetime
 #
+# Indexes
+#
+#  index_children_on_orphanage_id  (orphanage_id)
+#
 
-class Child < ActiveRecord::Base
+class Child < ApplicationRecord
   belongs_to :orphanage
-  belongs_to :mentor, foreign_key: :mentor_id, class_name: 'User'
+  belongs_to :mentor, foreign_key: :mentor_id, class_name: 'User', optional: true
   has_many :meetings
 
   has_attached_file :avatar
   validates_attachment_size :avatar, less_than: 1.megabytes
   validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png image/gif)
 
-  validates :first_name, presence: true
-  validates :last_name,  presence: true
+  validates :first_name, :last_name, :birthdate, presence: true
 
   scope :want_to_be_friends, -> { where(is_friendly: true) }
 

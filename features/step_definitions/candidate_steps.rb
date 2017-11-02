@@ -38,7 +38,7 @@ When(/^I click on agreement checkbox$/) do
 end
 
 Then(/^I should see success message$/) do
-  page.should have_css('#success')
+  expect(page).to have_css('#success')
 end
 
 Then(/^I should see disabled submit button$/) do
@@ -46,11 +46,11 @@ Then(/^I should see disabled submit button$/) do
 end
 
 Given /^a new candidate$/ do
-  FactoryGirl.create :candidate
+  FactoryBot.create :candidate
 end
 
 Given /^a approved candidate$/ do
-  candidate = FactoryGirl.create(:candidate, email: 'zozozoz@zozoz.com')
+  candidate = FactoryBot.create(:candidate, email: 'zozozoz@zozoz.com')
   candidate.approve
 end
 
@@ -59,7 +59,7 @@ Then /^I should see (\d+) candidates$/ do |count|
 end
 
 Given /^a new candidate with email: "(.+)"$/ do |email|
-  FactoryGirl.create :candidate, email: email
+  FactoryBot.create :candidate, email: email
 end
 
 Then  /^a new user with email "(.+)" with role "(.+)" should be created$/ do |email, role|

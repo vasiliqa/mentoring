@@ -1,14 +1,15 @@
 Given /^a meeting to "(.+)" and user "(.+)" at yesterday$/ do |child_name, email|
-  Meeting.create! do |meeting|
-    meeting.date = DateTime.yesterday
+  meeting = Meeting.create! do |meeting|
+    meeting.date = 1.day.since
     meeting.child_id = Child.find_by_first_name(child_name).id
     meeting.mentor_id = User.find_by_email(email).id
   end
+  meeting.update(date: 1.day.before)
 end
 
 Then /^I should meeting's action "(.+)" visible only meeting at yesterday$/ do |action_name|
   page.all('table tbody tr').each do |row|
-    if row.has_content?(Date.yesterday)
+    if row.has_content?(1.day.since.to_date)
       expect(row).to have_selector(:link_or_button, action_name)
     else
       expect(row).to_not have_button(:link_or_button, action_name)
@@ -28,10 +29,11 @@ end
 
 Given /^meeting to "(.+)" and user "(.+)" at yesterday on state "report_sent"$/ do |child_name, email|
   meeting = Meeting.create! do |m|
-    m.date = DateTime.yesterday
+    m.date = 1.day.since
     m.child_id = Child.find_by_first_name(child_name).id
     m.mentor_id = User.find_by_email(email).id
   end
+  meeting.update(date: 1.day.before)
 
   Report.create! do |report|
     report.meeting_id = meeting.id

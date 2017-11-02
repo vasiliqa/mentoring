@@ -1,5 +1,5 @@
 Feature: Reporting
-  In order to allow mentors create report and psych read and verify it
+  In order to allow mentors create report and a curator read and verify it
   Mentor should send report during the day after meeting unless meeting marked as expired
 
 
@@ -36,7 +36,7 @@ Feature: Reporting
      And I should be redirected to list of meetings
      And the meeting should have state "report_sent"
 
-  Scenario: Psych reject report
+  Scenario: A curator reject report
     Given meeting to "Stalin" and user "mentor@example.com" at yesterday on state "report_sent"
       And I signed in as user with email: "psych@example.com"
     When I go to "/reports"

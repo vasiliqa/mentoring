@@ -16,8 +16,12 @@
 #  next_aim          :text
 #  other_comments    :text
 #
+# Indexes
+#
+#  index_reports_on_meeting_id  (meeting_id)
+#
 
-class Report < ActiveRecord::Base
+class Report < ApplicationRecord
   belongs_to :meeting
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
 
@@ -25,15 +29,7 @@ class Report < ActiveRecord::Base
   include PublicActivity::Model
   tracked only: [:create], owner: -> (controller, model) { model.meeting.mentor }
 
-  validates :meeting,         presence: true
-  validates :duration,        presence: true
-  validates :aim,             presence: true
-  validates :short_description, presence: true
-  validates :result,          presence: true
-  validates :feelings,        presence: true
-  validates :questions,       presence: true
-  validates :next_aim,        presence: true
-  validates :other_comments,  presence: true
+  validates :duration, :aim, :short_description, :result, :feelings, :questions, :next_aim, :other_comments, presence: true
 
   after_create do
     meeting.send_report!

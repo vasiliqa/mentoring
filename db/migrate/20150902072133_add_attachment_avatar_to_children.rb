@@ -1,4 +1,4 @@
-class AddAttachmentAvatarToChildren < ActiveRecord::Migration
+class AddAttachmentAvatarToChildren < ActiveRecord::Migration[4.2]
   def self.up
     change_table :children do |t|
       t.attachment :avatar

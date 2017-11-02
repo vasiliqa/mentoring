@@ -16,10 +16,14 @@
 #  next_aim          :text
 #  other_comments    :text
 #
+# Indexes
+#
+#  index_reports_on_meeting_id  (meeting_id)
+#
 
 require 'rails_helper'
 
-RSpec.describe Report, :type => :model do
+RSpec.describe Report, type: :model do
 
   let! (:orphanage) { create :orphanage}
   let! (:curator) { create :user, :curator, orphanage_id: orphanage.id }

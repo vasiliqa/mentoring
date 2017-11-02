@@ -3,13 +3,11 @@ class Ability
 
   def initialize(user)
     if user
-      roles = user.roles.map(&:name)
       collaborators_ids = user.orphanage ? user.orphanage.users.where.not(id: user.id).pluck(:id) : []
 
-      if roles.include? 'employee'
-        common_access user
+      common_access user if user.has_role?(:employee)
 
-      elsif roles.include? 'mentor'
+      if user.has_role?(:mentor)
         meetings_ids = user.meetings.pluck(:id)
 
         common_access user
@@ -31,10 +29,9 @@ class Ability
                                               trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
-                                              trackable_type: 'Forem::Topic'}
+      end
 
-      elsif roles.include? 'curator'
+      if user.has_role?(:curator)
         subordinates_ids = user.subordinates.with_role(:mentor).pluck(:id)
 
         common_access user
@@ -56,21 +53,19 @@ class Ability
                                               trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
-                                              trackable_type: 'Forem::Topic'}
-
-      elsif roles.include? 'admin'
-        can :manage, :all
       end
+
+      can :manage, :all if user.has_role?(:admin)
     end
   end
 
   private
-    def common_access user
+    def common_access(user)
       can [:read, :create], Comment
       can :read, Album
       can :read, Photo
-      can :read, User, orphanage_id: user.orphanage_id
+      can :read, User, orphanage_id: user.orphanage_id unless user.orphanage_id == nil
+      can :read, user
       can :update, user
       can :read, Child, orphanage_id: user.orphanage_id
     end

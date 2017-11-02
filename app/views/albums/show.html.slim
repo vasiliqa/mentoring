@@ -13,29 +13,27 @@ p#alert = alert
     .column.six.wide
       - if can? :edit, @album
         = render partial: 'photos/dropzone', locals: {album: @album, photo: @album.photos.new}
+  - if can? :edit, @album
+    .row
+      .column
+        = link_to edit_album_path(@album), class: 'ui button green' do
+          i.icon.edit
+          | Редактировать альбом
 
   .row
-    = link_to edit_album_path(@album), class: 'ui button green' do
-      i.icon.edit
-      | Редактировать альбом
+    .column
+      - if @photos.blank?
+        .item
+          .image
+          .content
+            .meta
+              | В этом альбоме пока нет фотографий
 
-  .row
-    - if @photos.blank?
-      .item
-        .image
-        .content
-          .meta
-            | В этом альбоме пока нет фотографий
-
-    - else
-      .ui.segment
-        .ui.small.images
-          - @photos.each do |photo|
-            = link_to photo do
-              = image_tag photo.image.url(:original, false), class: 'ui image'
+      - else
+        .ui.segment
+          .ui.small.images
+            - @photos.each do |photo|
+              = link_to photo do
+                = image_tag photo.image.url(:original, false), class: 'ui image'
 
 == render 'back'
-
-- if can? :edit, @album
-  coffee:
-    new @Filedropzone('.dropzone')

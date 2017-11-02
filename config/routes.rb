@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 
   resources :activities, module: :public_activity, only: [:index]
 
-  mount Forem::Engine, at: '/forums'
-  
   resources :candidates do
     get :approve, on: :member
   end
@@ -50,7 +48,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :meetings do
+  resources :meetings, except: [:edit, :update] do
     member do
       get :reject
       get :reopen

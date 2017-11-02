@@ -10,10 +10,14 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_meetings_on_child_id  (child_id)
+#
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :meeting do
-    date DateTime.tomorrow
+    date 1.day.since
     state 'new'
     child_id 1
     mentor_id 2

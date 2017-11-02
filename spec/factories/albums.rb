@@ -9,8 +9,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_albums_on_user_id  (user_id)
+#
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :album do
     title "MyString"
     description "MyText"

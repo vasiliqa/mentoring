@@ -9,12 +9,14 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_albums_on_user_id  (user_id)
+#
 
-class Album < ActiveRecord::Base
+class Album < ApplicationRecord
   belongs_to :user
   has_many :photos
 
-  validates :user, presence: true
   validates :title, presence: true
-
 end

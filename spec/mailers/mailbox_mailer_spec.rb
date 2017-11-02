@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe MailboxMailer, :type => :mailer do
+RSpec.describe MailboxMailer, type: :mailer do
 
   let! (:orphanage) { create :orphanage}
   let! (:curator) { create :user, :curator, orphanage_id: orphanage.id }

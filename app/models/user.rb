@@ -19,17 +19,20 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  curator_id             :integer
-#  forem_admin            :boolean          default(FALSE)
-#  forem_state            :string           default("pending_review")
-#  forem_auto_subscribe   :boolean          default(FALSE)
 #  orphanage_id           :integer
 #  avatar_file_name       :string
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
 #
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_orphanage_id          (orphanage_id)
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
 
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_many :children, foreign_key: :mentor_id
   has_many :meetings, foreign_key: :mentor_id
   has_many :subordinates, class_name: 'User', foreign_key: :curator_id
@@ -37,8 +40,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :albums
   has_many :photos
-  belongs_to :orphanage
-  belongs_to :curator, class_name: 'User'
+  belongs_to :orphanage, optional: true
+  belongs_to :curator, class_name: 'User', optional: true
 
   acts_as_messageable
   rolify
@@ -49,9 +52,8 @@ class User < ActiveRecord::Base
   validates_attachment_size :avatar, less_than: 1.megabytes
   validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png image/gif)
 
-  validates :email,      presence: true, uniqueness: { case_sensitive: false }
-  validates :first_name, presence: true
-  validates :last_name,  presence: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
+  validates :first_name, :last_name, presence: true
 
   def name
     full_name
@@ -75,10 +77,6 @@ class User < ActiveRecord::Base
 
   def full_name
     "#{last_name} #{first_name} #{middle_name}"
-  end
-
-  def forem_name
-    mail_name
   end
 
   def for_messaging

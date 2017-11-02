@@ -14,8 +14,6 @@
 #  confession               :string
 #  health_status            :string
 #  serious_diseases         :string
-#  work_start_date          :date
-#  work_end_date            :date
 #  organization_name        :string
 #  work_contacts            :string
 #  work_position            :string
@@ -23,11 +21,6 @@
 #  work_schedule            :string
 #  hobby                    :text
 #  martial_status           :string
-#  house_type               :string
-#  number_of_rooms          :string
-#  peoples_for_room         :string
-#  peoples                  :text
-#  pets                     :string
 #  program_role             :string
 #  program_reason           :text
 #  person_character         :text
@@ -54,7 +47,7 @@
 #  russian_citizenship      :boolean
 #
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :candidate do
     last_name "Laden"
     first_name "Osama"
@@ -70,8 +63,6 @@ FactoryGirl.define do
     health_status "ok"
     serious_diseases "no"
 
-    work_start_date 10.years.ago
-    work_end_date nil
     organization_name "Al'Kaida"
     work_contacts "911"
     work_position "Leader"
@@ -81,12 +72,6 @@ FactoryGirl.define do
     hobby "Exploding"
 
     martial_status "married"
-
-    house_type "House"
-    number_of_rooms "22"
-    peoples_for_room "1"
-    peoples "22"
-    pets "yes, one bear"
 
     program_role "Mentor"
     program_reason "Because i can"
@@ -111,11 +96,5 @@ FactoryGirl.define do
     reports true
     photo_rights true
     info_about_program "internet"
-
-    candidate_educations {[FactoryGirl.build(:candidate_education)]}
-    candidate_family_members {[FactoryGirl.build(:candidate_family_member)]}
-    candidate_children_experiences {[FactoryGirl.build(:candidate_children_experience)]}
-
   end
-
 end

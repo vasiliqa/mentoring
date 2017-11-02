@@ -1,4 +1,4 @@
-class CreateOrphanages < ActiveRecord::Migration
+class CreateOrphanages < ActiveRecord::Migration[4.2]
   def change
     create_table :orphanages do |t|
       t.string :name

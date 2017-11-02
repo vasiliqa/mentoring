@@ -1,21 +1,34 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, :type => :controller do
+RSpec.describe UsersController, type: :controller do
+  render_views
 
-  let! (:orphanage) { create :orphanage }
-  let! (:curator) { create :user, :curator, orphanage_id: orphanage.id }
+  let (:curator) { create :user, :curator }
 
   before (:each) { sign_in curator}
 
   describe '#show' do
     context 'when logged in' do
-      before do
-        get :show, id: curator.to_param
+      it do
+        get :show, params: { id: curator.to_param }
+        expect(response.status).to eq(200)
+        expect(response).to render_template('show')
       end
-
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to render_template('show') }
     end
   end
 
+  describe '#update' do
+    context 'when logged in' do
+      it do
+        expect(curator.avatar_file_name).to eq nil
+        put :update, params: {
+          id: curator.to_param,
+          user: { avatar: fixture_file_upload('spec/fixtures/cat.jpg', 'image/png') }
+        }
+        expect(curator.reload.avatar_file_name).to eq 'cat.jpg'
+        expect(response).to redirect_to user_path(curator)
+        expect(flash[:notice]).to match(/Аватар успешно сохранён./)
+      end
+    end
+  end
 end

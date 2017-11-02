@@ -16,8 +16,12 @@
 #  next_aim          :text
 #  other_comments    :text
 #
+# Indexes
+#
+#  index_reports_on_meeting_id  (meeting_id)
+#
 
-FactoryGirl.define do
+FactoryBot.define do
   factory :report do
     duration 2
     aim 'aim'
