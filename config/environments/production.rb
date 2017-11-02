@@ -18,6 +18,7 @@ Rails.application.configure do
   # Requires an encryption key in `ENV["RAILS_MASTER_KEY"]` or
   # `config/secrets.yml.key`.
   config.read_encrypted_secrets = true
+  config.secret_key_base = ENV['SECRET_KEY_BASE']
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -63,14 +64,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'nastavnik54.ru' }
+  config.action_mailer.default_url_options = { host: 'vasiliqa-mentoring.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address:              'smtp.yandex.ru',
+      address:              'smtp.gmail.com',
       port:                  587,
-      domain:               'yandex.ru',
-      user_name:            'notify@nastavnik54.ru',
-      password:             'EZsZ-XUAlC-6TJqFk0mimg',
+      domain:               'gmail.com',
+      user_name:            ENV['GMAIL_USER'],
+      password:             ENV['GMAIL_PASS'],
       authentication:       :plain,
       enable_starttls_auto: true
   }
