@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
   protect_from_forgery with: :exception
 
+  http_basic_authenticate_with name: 'mentoring', password: 'civility_chair_cube_aloe' if Rails.env == 'production'
+
   before_action :main_ability
   helper_method :mailbox, :unread_mails_count, :children_for_friendship
 
@@ -21,7 +23,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def after_sign_in_path_for resource
+  def after_sign_in_path_for(resource)
     current_user.has_role?(:admin) ? rails_admin_path : user_path(current_user)
   end
 
