@@ -1,11 +1,10 @@
 .title
   span.middle_text.bold_text
-      = link_to 'http://www.sgdeti.ru/', target: '_blank'
-        = image_tag 'main_page/suncity_logo_new.png', width: 201
+      = link_to 'https://happydeti24.ru/', target: '_blank'
+        = image_tag 'main_page/happy_logo.png', height: 120
         |  &nbsp;&nbsp;
-      br
-      = link_to root_path, class: 'white_text'
-        | НАСТАВНИЧЕСТВО
+span.middle_text.bold_text
+  = link_to 'ДЕТСКИЙ ДОМ', root_path, class: 'white_text root_link'
 .menu_item
   = active_link_to 'О ПРОЕКТЕ', about_path
 .menu_item

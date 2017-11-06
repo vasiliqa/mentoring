@@ -1,6 +1,6 @@
 .ui.visible.inverted.left.vertical.sidebar.labeled.icon.menu.green
   .ui.inverted.header
-    = link_to 'Наставничество', main_app.root_path, class: 'item'
+    = link_to 'Детский дом', root_path, class: 'item'
 
   - if user_signed_in? && @main_ability.can?(:read, PublicActivity::Activity)
     = link_to activities_path, class: 'item' do
