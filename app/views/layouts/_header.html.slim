@@ -1,20 +1,20 @@
 .ui.visible.top.sidebar.green.inverted.menu
   .right.menu
     - if user_signed_in?
-      = link_to main_app.user_path(current_user), class: 'item' do
+      = link_to user_path(current_user), class: 'item' do
         i.user.icon
         = "#{current_user.translated_roles.join(', ')} | "
         = current_user.email
 
-      = link_to main_app.edit_user_registration_path, class: 'item' do
+      = link_to edit_user_registration_path, class: 'item' do
         i.icon.refresh
         | Сменить пароль
 
-      = link_to main_app.destroy_user_session_path, :method => :delete, class: 'item' do
+      = link_to destroy_user_session_path, :method => :delete, class: 'item' do
         i.icon.sign.out
         | Выйти
 
     - else
-      = link_to main_app.new_user_session_path, class: 'item' do
+      = link_to new_user_session_path, class: 'item' do
         i.icon.sign.in
         | Войти
