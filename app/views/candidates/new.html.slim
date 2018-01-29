@@ -1,4 +1,4 @@
-.ui.basic.very.padded.container.segment
+.ui.basic.very.container.segment
 
   - if @candidate.errors.any?
     #error_explanation
@@ -9,7 +9,7 @@
 
   = form_for @candidate, html: { class: 'ui form' } do |f|
     - form_errors = @candidate.errors.messages
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 1. Общие сведения:
       .three.fields
@@ -67,7 +67,7 @@
             .inline.field.radio.checkbox
               = f.label :russian_citizenship_false, 'Нет'
               = f.radio_button :russian_citizenship, false
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 2. Состояние здоровья:
       .field.required class=('error' if form_errors[:health_status].present?)
@@ -76,16 +76,16 @@
       .field.required class=('error' if form_errors[:serious_diseases].present?)
         = f.label :serious_diseases, 'Имеете ли вы серьёзные заболевания? Если да, укажите, какие.'
         = f.text_field :serious_diseases
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 3. Образование:
       = f.fields_for :candidate_educations do |education|
         = render 'candidate_education_fields', f: education
       .actions
-        = link_to_add_association f, :candidate_educations, class: 'ui button green fluid' do
+        = link_to_add_association f, :candidate_educations, class: 'ui button fluid' do
           i.icon.plus
           | Добавить образование
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 4. Трудоустройство:
       p
@@ -105,13 +105,13 @@
       .field.required class=('error' if form_errors[:work_schedule].present?)
         = f.label :work_schedule, 'Укажите ваш текущий рабочий график'
         = f.text_field :work_schedule
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 5. Интересы, хобби:
       .field.required class=('error' if form_errors[:hobby].present?)
         = f.label :hobby, 'Чем вы любите заниматься в свободное время?'
         = f.text_area :hobby
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 6. Семейное положение:
       .field.required class=('error' if form_errors[:martial_status].present?)
@@ -123,10 +123,10 @@
         = f.fields_for :candidate_family_members do |fam|
           = render 'candidate_family_member_fields', f: fam
         .actions
-          = link_to_add_association f, :candidate_family_members, class: 'ui button green fluid' do
+          = link_to_add_association f, :candidate_family_members, class: 'ui button fluid' do
             i.icon.plus
             | Добавить члена семьи
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 7. Опыт работы с детьми:
       p
@@ -134,10 +134,10 @@
       = f.fields_for :candidate_children_experiences do |experience|
         = render 'candidate_children_experience_fields', f: experience
       .actions
-        = link_to_add_association f, :candidate_children_experiences, class: 'ui button green fluid' do
+        = link_to_add_association f, :candidate_children_experiences, class: 'ui button fluid' do
           i.icon.plus
           | Добавить пункт
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 8. Пожалуйста, как можно подробнее ответьте на следующие вопросы:
       p
@@ -187,7 +187,7 @@
           .inline.field.radio.checkbox
             = f.label :invalid_child_false, 'Нет'
             = f.radio_button :invalid_child, false
-    .ui.orange.segment
+    .ui.segment
       h3.ui.header
         | 9. В целях соблюдения прав и  интересов ребёнка (в том числе его  безопасности и здорового развития), мы просим вас сообщить нам следующее:
       .field.required class=('error' if form_errors[:alcohol].present?)
@@ -236,7 +236,7 @@
           option value='Друзья, родные, знакомые'
           option value='Служба по делам детей'
 
-    .ui.orange.segment
+    .ui.segment
       .ui.segment
         h3.ui.header
           | Личное заявление:

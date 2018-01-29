@@ -1,20 +1,17 @@
 .title
-  span.middle_text.bold_text
-      = link_to 'https://happydeti24.ru/', target: '_blank'
-        = image_tag 'main_page/happy_logo.png', height: 120
-        |  &nbsp;&nbsp;
-span.middle_text.bold_text
-  = link_to 'ДЕТСКИЙ ДОМ', root_path, class: 'white_text root_link'
+  = link_to 'https://happydeti24.ru/', target: '_blank'
+    = image_tag 'main_page/happy_logo.png', height: 120
+  = link_to 'Детский дом', root_path, class: 'root_link'
 .menu_item
-  = active_link_to 'О ПРОЕКТЕ', about_path
+  = active_link_to 'О проекте', about_path
 .menu_item
-  = active_link_to 'ПРИСОЕДИНИТЬСЯ', new_candidate_path
+  = active_link_to 'Присоединиться', new_candidate_path
 .menu_item
-  = active_link_to 'ХОЧУ ДРУЖИТЬ', friendship_path
+  = active_link_to 'Хочу дружить', friendship_path
 .menu_item
-  = active_link_to 'КОНТАКТЫ', contacts_path
+  = active_link_to 'Контакты', contacts_path
 .menu_item
   - if user_signed_in?
-    = active_link_to 'МОЙ КАБИНЕТ', user_path(current_user)
+    = active_link_to 'Мой кабинет', user_path(current_user)
   - else
-    = active_link_to 'ВХОД', new_user_session_path
+    = active_link_to 'Вход', new_user_session_path

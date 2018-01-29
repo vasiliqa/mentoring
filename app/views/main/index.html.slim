@@ -12,13 +12,12 @@
     br
     | ведь откуда им о ней узнать?
 
-  = link_to new_candidate_path do
-    .button_block.green.big_text
-      | ХОЧУ УЧАСТВОВАТЬ
-.image_bottom_attached_block.orange.big_text
-  | Что такое проект &laquo;Детский дом&raquo;?
+.button_block.btn-blue
+  = link_to 'Хочу участвовать', new_candidate_path
+
 .first_content_block
   .inner_content_block
+    h1 Что такое проект &laquo;Детский дом&raquo;?
     .column
       .icon.female
       .title
@@ -116,9 +115,9 @@
         br
         | необходимую информацию.
 
-  = link_to about_path do
-    .button_block.orange.big_text
-      | ПОДРОБНЕЕ
+.button_block.btn-yellow
+  = link_to 'Подробнее', about_path
+
 .second_image_block
   .image_content_block
     | Результаты регулярных тестирований показывают,
@@ -128,37 +127,37 @@
     | отмечается положительная динамика в плане коммуникации,
     br
     | целеполагания, социализации и профориентации.
-.image_bottom_attached_block.green.very_big_text
-  | Как это работает:
+
 .second_content_block
   .inner_content_block
+    h2 Как это работает:
     p
-      span.number.orange_text.middle_text.bold_text
+      span.number
         | 1.
       | В рамках проекта у ребёнка появляется значимый взрослый – старший друг,
       br
       | который будет искренне интересоваться его жизнью и поддерживать его.
     p
-      span.number.orange_text.middle_text.bold_text
+      span.number
         | 2.
       | В проекте участвуют подростки из детских домов от 7 лет, наставник должен
       br
       | быть старше 18 лет.
     p
-      span.number.orange_text.middle_text.bold_text
+      span.number
         | 3.
       | После того, как взрослый заполняет анкету, проводится собеседование с
       br
       | психологом для уточнения всех неясных моментов.
     p
-      span.number.orange_text.middle_text.bold_text
+      span.number
         | 4.
       | Далее кураторы проекта подбирают Наставнику ребенка, подходящего ему по
       br
       | возрасту, полу, особенностям характера и поведения.
 
     p
-      span.number.orange_text.middle_text.bold_text
+      span.number
         | 5.
       |Да, иногда установить с ребёнком контакт бывает нелегко. У каждого из
       br
@@ -168,13 +167,14 @@
       br
       | специалисты на групповых встречах и индивидуальных консультациях.
   br
-  = link_to new_candidate_path do
-    .button_block.green.big_text
-      | ЗАПОЛНИТЬ АНКЕТУ
-  br
-  = link_to 'http://sgdeti.ru/helps/money_help' do
-    .button_block.orange.big_text
-      | СДЕЛАТЬ ПОЖЕРТВОВАНИЕ
+
+.flex
+  .button_block.btn-pink
+    = link_to 'Заполнить анкету', new_candidate_path
+
+  .button_block.btn-red
+    = link_to 'Пожертвовать', 'https://happydeti24.ru/campaign/detskijdom', target: '_blank'
+
 .third_image_block
   .image_content_block
     | Ребёнок в детском доме живет в искусственных условиях.

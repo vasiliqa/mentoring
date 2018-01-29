@@ -1,3 +1,9 @@
+$gray: #7f7f7f
+$blue: #255c9d
+$orange: #fdc622
+$red: #f24147
+$pink: #c22575
+
 .big_date_separator
   width: 16%
 .small_date_separator
@@ -6,3 +12,15 @@
 .segment
   .ui.divider:last-child
     display: none
+
+form
+  .ui.segment
+    border-top: 2px solid $orange
+  .ui.label.remove_fields
+    background-color: $orange
+    border-color: $orange
+    color: white
+  .ui.button.add_fields, #submit_button
+    background-color: $blue
+    border-color: $blue
+    color: white

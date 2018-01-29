@@ -1,53 +1,52 @@
-.contacts_content_block
-  h2 Контакты:
+h1 Контакты:
 
-  .ui.three.cards
-    .card
-      .image = image_tag 'contacts/anastacia.jpg'
-      .content
-        .header Анастасия Шилибольская
-        .meta Куратор проекта
-        .description
-          p 8-952-906-3897
-      .extra.content = mail_to 'shilib.anastasia@gmail.com'
+.ui.three.cards
+  .card
+    .image = image_tag 'contacts/anastacia.jpg'
+    .content
+      .header Анастасия Шилибольская
+      .meta Куратор проекта
+      .description
+        p 8-952-906-3897
+    .extra.content = mail_to 'shilib.anastasia@gmail.com'
 
-    .card
-      .image = image_tag 'contacts/veronika.jpg'
-      .content
-        .header Вероника Винокурова
-        .meta Психолог проекта
-        .description
-          p 8-913-912-6634
-      .extra.content = mail_to 'bon-vent@yandex.ru'
+  .card
+    .image = image_tag 'contacts/veronika.jpg'
+    .content
+      .header Вероника Винокурова
+      .meta Психолог проекта
+      .description
+        p 8-913-912-6634
+    .extra.content = mail_to 'bon-vent@yandex.ru'
 
-    .card
-      .image = image_tag 'contacts/chistiakova.jpg'
-      .content
-        .header Наталья Чистякова
-        .meta Психолог проекта
-        .description
-          p 8-923-142-5488
+  .card
+    .image = image_tag 'contacts/chistiakova.jpg'
+    .content
+      .header Наталья Чистякова
+      .meta Психолог проекта
+      .description
+        p 8-923-142-5488
 
-    .card
-      .content
-        = link_to 'https://happydeti24.ru/', target: '_blank' do
-          .ui.image.medium = image_tag 'main_page/happy_logo.png'
-        br
-        br
-        .description
-          p
-            | Адрес фонда: 660135, г. Красноярск
-            br
-            |  ул. Молокова, д. 19, пом. 103
-            br
-            |  Телефон: +7 (391) 215-06-15
-            br
-            |  E-mail:&nbsp;
-            = mail_to 's-deti2014@mail.ru'
-          p
-            = link_to 'https://happydeti24.ru/', 'https://happydeti24.ru/', target: '_blank'
-          p
-            | Директор фонда:
-            br
-            | Светлана Ковалёва
+  .card
+    .content
+      = link_to 'https://happydeti24.ru/', target: '_blank' do
+        .ui.image.medium = image_tag 'main_page/happy_logo.png'
+      br
+      br
+      .description
+        p
+          | Адрес фонда: 660135, г. Красноярск
           br
+          |  ул. Молокова, д. 19, пом. 103
+          br
+          |  Телефон: +7 (391) 215-06-15
+          br
+          |  E-mail:&nbsp;
+          = mail_to 's-deti2014@mail.ru'
+        p
+          = link_to 'https://happydeti24.ru/', 'https://happydeti24.ru/', target: '_blank'
+        p
+          | Директор фонда:
+          br
+          | Светлана Ковалёва
+        br
