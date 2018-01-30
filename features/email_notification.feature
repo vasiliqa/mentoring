@@ -21,6 +21,7 @@ Feature: EmailNotifications
     And I fill in all "email" inputs with "test@example.com"
     And I select option from each select
     And I choose each radio button with label "Да"
+    And I choose each radio button inside the table
     And I click on agreement checkbox
     And I click to the submit button
     Then admin should receive email-notification

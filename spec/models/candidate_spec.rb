@@ -17,20 +17,12 @@
 #  organization_name        :string
 #  work_contacts            :string
 #  work_position            :string
-#  work_functions           :text
-#  work_schedule            :string
 #  hobby                    :text
 #  martial_status           :string
 #  program_role             :string
-#  program_reason           :text
-#  person_character         :text
-#  person_information       :text
-#  help_reason              :text
 #  child_age                :string
 #  child_gender             :string
-#  child_character          :text
-#  visit_frequency          :string
-#  invalid_child            :boolean
+#  invalid_child            :text
 #  alcohol                  :string
 #  tobacco                  :string
 #  psychoactive             :string
@@ -45,6 +37,26 @@
 #  updated_at               :datetime         not null
 #  state_comment            :text
 #  russian_citizenship      :boolean
+#  family_attitude          :text
+#  visit_hours              :text
+#  want_new                 :integer
+#  plan_be_adoptive_parent  :integer
+#  want_be_significant      :integer
+#  want_get_experience      :integer
+#  want_more_kids           :integer
+#  want_be_in_team          :integer
+#  want_change_job          :integer
+#  pity_kids                :integer
+#  want_pass_experience     :integer
+#  maternal_instinct        :integer
+#  want_increase_status     :integer
+#  foreign_child            :text
+#  unsolvable_problems      :text
+#  tragic_events            :text
+#  child_emotions           :text
+#  life_changes             :text
+#  week_visits              :boolean
+#  monthly_meeting          :boolean
 #
 
 require 'rails_helper'

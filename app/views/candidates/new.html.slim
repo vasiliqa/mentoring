@@ -44,7 +44,9 @@
         .field.five.wide.required class=('error' if form_errors[:birth_date].present?)
           = f.label :birth_date, 'Дата рождения'
           .three.fields
-            = f.date_select :birth_date, {start_year: 1917, end_year: Date.today.year, date_separator: '<div class="big_date_separator"></div>'}
+            = f.date_select :birth_date,
+              { start_year: 1917, end_year: Date.today.year, include_blank: true, selected: nil,
+                date_separator: '<div class="big_date_separator"></div>'}
       .two.fields
         .field.eleven.wide.required  class=('error' if form_errors[:confession].present?)
           = f.label :confession, 'Вероисповедание'
@@ -67,6 +69,7 @@
             .inline.field.radio.checkbox
               = f.label :russian_citizenship_false, 'Нет'
               = f.radio_button :russian_citizenship, false
+
     .ui.segment
       h3.ui.header
         | 2. Состояние здоровья:
@@ -76,6 +79,7 @@
       .field.required class=('error' if form_errors[:serious_diseases].present?)
         = f.label :serious_diseases, 'Имеете ли вы серьёзные заболевания? Если да, укажите, какие.'
         = f.text_field :serious_diseases
+
     .ui.segment
       h3.ui.header
         | 3. Образование:
@@ -85,6 +89,7 @@
         = link_to_add_association f, :candidate_educations, class: 'ui button fluid' do
           i.icon.plus
           | Добавить образование
+
     .ui.segment
       h3.ui.header
         | 4. Трудоустройство:
@@ -99,18 +104,17 @@
       .field.required class=('error' if form_errors[:work_position].present?)
         = f.label :work_position, 'Должность'
         = f.text_field :work_position
-      .field.required class=('error' if form_errors[:work_functions].present?)
-        = f.label :work_functions, 'Исполняемые обязанности'
-        = f.text_area :work_functions
-      .field.required class=('error' if form_errors[:work_schedule].present?)
-        = f.label :work_schedule, 'Укажите ваш текущий рабочий график'
-        = f.text_field :work_schedule
+      .field.required class=('error' if form_errors[:visit_hours].present?)
+        = f.label :visit_hours, 'В какое время вы можете посещать ребенка?'
+        = f.text_field :visit_hours
+
     .ui.segment
       h3.ui.header
         | 5. Интересы, хобби:
       .field.required class=('error' if form_errors[:hobby].present?)
         = f.label :hobby, 'Чем вы любите заниматься в свободное время?'
-        = f.text_area :hobby
+        = f.text_area :hobby, rows: 3
+
     .ui.segment
       h3.ui.header
         | 6. Семейное положение:
@@ -126,37 +130,52 @@
           = link_to_add_association f, :candidate_family_members, class: 'ui button fluid' do
             i.icon.plus
             | Добавить члена семьи
+      .field.required class=('error' if form_errors[:family_attitude].present?)
+        = f.label :family_attitude, 'Как члены семьи относятся к вашему решению стать наставником?'
+        = f.text_area :family_attitude, rows: 3
+
     .ui.segment
       h3.ui.header
-        | 7. Опыт работы с детьми:
-      p
-        | Пожалуйста, укажите ваш текущий и предыдущий опыт работы с детьми (оплачиваемая работа, волонтёрская деятельность и т.д.)
-      = f.fields_for :candidate_children_experiences do |experience|
-        = render 'candidate_children_experience_fields', f: experience
-      .actions
-        = link_to_add_association f, :candidate_children_experiences, class: 'ui button fluid' do
-          i.icon.plus
-          | Добавить пункт
-    .ui.segment
-      h3.ui.header
-        | 8. Пожалуйста, как можно подробнее ответьте на следующие вопросы:
+        | 7. Пожалуйста, как можно подробнее ответьте на следующие вопросы:
       p
         | Используя данную вами информацию, мы сможем предложить вам наиболее подходящую программу взаимодействия с Воспитанником.
       .field.required class=('error' if form_errors[:program_role].present?)
         = f.label :program_role, 'Вы хотите участвовать в Программе "Детский дом" в качестве:'
         = f.collection_select(:program_role, Candidate::PROGRAM_ROLES, :to_s, :to_s, { prompt: 'Выбрать...' })
-      .field.required class=('error' if form_errors[:program_reason].present?)
-        = f.label :program_reason, 'Почему вы хотите стать наставником (волонтером/партнёром)? '
-        = f.text_area :program_reason
-      .field.required class=('error' if form_errors[:person_character].present?)
-        = f.label :person_character, 'Какие качества вашего характера, особенные знания, навыки и т.д., могут, по вашему мнению, помочь становлению и развитию ребёнка-сироты?'
-        = f.text_area :person_character
-      .field.required class=('error' if form_errors[:person_information].present?)
-        = f.label :person_information, 'Как бы вы описали (охарактеризовали) сами себя?'
-        = f.text_area :person_information
-      .field.required class=('error' if form_errors[:help_reason].present?)
-        = f.label :help_reason, 'Почему вы хотите помогать ребёнку-сироте?'
-        = f.text_area :help_reason
+      h5
+        |Оцените по шкале от 1 до 5, что вас привлекает в волонтерской деятельности:
+      table.ui.celled.table
+        thead
+          tr
+            th.six.wide
+            th.two.wide.center.aligned 1 (совсем не важно)
+            th.two.wide.center.aligned 2 (не важно)
+            th.two.wide.center.aligned 3 (достаточно важно)
+            th.two.wide.center.aligned 4 (важно)
+            th.two.wide.center.aligned 5 (основная причина)
+        tbody
+          - { want_new: 'Хочу попробовать что-то новое',
+              plan_be_adoptive_parent: 'Планирую стать приемным родителем',
+              want_be_significant: 'Хочу быть значимым человеком для кого-то',
+              want_get_experience: 'Хочу получить опыт работы с детьми',
+              want_more_kids: 'Свои дети выросли, хочу принять участие в судьбе других детей',
+              want_be_in_team: 'Хочу быть частью команды',
+              want_change_job: 'Хочу сменить вид деятельности',
+              pity_kids: 'Жаль детей',
+              want_pass_experience: 'Хочу передать свой опыт кому-то',
+              maternal_instinct: 'Материнский инстинкт',
+              want_increase_status: 'Хочу повысить свою значимость / социальный статус'\
+            }.each do |field, question|
+            tr
+              td
+                .field.required class=('error' if form_errors[field].present?)
+                  label = question
+              td.center.aligned = f.radio_button field, 1
+              td.center.aligned = f.radio_button field, 2
+              td.center.aligned = f.radio_button field, 3
+              td.center.aligned = f.radio_button field, 4
+              td.center.aligned = f.radio_button field, 5
+
       .field
         label
           | Какие ваши ожидания от ребёнка, с которым вы хотите взаимодействовать?
@@ -167,29 +186,38 @@
           .field.required class=('error' if form_errors[:child_gender].present?)
             = f.label :child_gender, 'Пол'
             = f.collection_select(:child_gender, Candidate::CHILD_GENDERS, :to_s, :to_s, { prompt: 'Выбрать...' })
-      .field.required class=('error' if form_errors[:child_character].present?)
-        = f.label :child_character, 'Насколько важным для вас является характер ребёнка (внешний вид, поведенческие особенности)?'
-        = f.text_area :child_character
-      .field.required class=('error' if form_errors[:visit_frequency].present?)
-        = f.label :visit_frequency, 'Как часто вы сможете навещать ребенка в учреждении?'
-        = f.text_field :visit_frequency, list: 'visit_frequency'
-        datalist#visit_frequency
-          option value='1 раз в неделю'
-          option value='1 раз в месяц'
-          option value='Как будет необходимо по Программе'
-      .field.required
+
+      .field.required class=('error' if form_errors[:invalid_child].present?)
+        = f.label :invalid_child, 'Готовы ли вы работать с ребенком-инвалидом (физические / ментальные нарушения)?'
+        = f.text_area :invalid_child, rows: 3
+      .field.required class=('error' if form_errors[:foreign_child].present?)
+        = f.label :foreign_child, 'Готовы ли вы работать с ребенком другой национальности?'
+        = f.text_area :foreign_child, rows: 3
+      .field.required class=('error' if form_errors[:unsolvable_problems].present?)
+        = f.label :unsolvable_problems, 'Как вы думаете, с какими проблемами вы не готовы столкнуться?'
+        = f.text_area :unsolvable_problems, rows: 3
+      .field.required class=('error' if form_errors[:tragic_events].present?)
+        = f.label :tragic_events, 'Происходили ли в вашей жизни в последние 2 года трагические события (тяжелые болезни, утраты, и т.д.)?'
+        = f.text_area :tragic_events, rows: 3
+      .field.required class=('error' if form_errors[:child_emotions].present?)
+        = f.label :child_emotions, 'Есть ли у вас переживания, связанные с вашим детством, отношением с родителями?'
+        = f.text_area :child_emotions, rows: 3
+      .field.required class=('error' if form_errors[:life_changes].present?)
+        = f.label :life_changes, 'Планируете ли вы в ближайший год существенные изменения в жизни (переезд, смена работы, изменение семейного статуса, рождение ребенка, и т.д.)?'
+        = f.text_area :life_changes, rows: 3
+      .field.required class=('error' if form_errors[:week_visits].present?)
         label
-          | Согласны ли вы взаимодействовать с ребёнком имеющим функциональные ограничения или особенные потребности?
+          | Сможете ли вы навещать ребенка раз в неделю?
         .fields.radio_button
           .inline.field.radio.checkbox
-            = f.label :invalid_child_true, 'Да'
-            = f.radio_button :invalid_child, true
+            = f.label :week_visits_true, 'Да'
+            = f.radio_button :week_visits, true
           .inline.field.radio.checkbox
-            = f.label :invalid_child_false, 'Нет'
-            = f.radio_button :invalid_child, false
+            = f.label :week_visits_false, 'Нет'
+            = f.radio_button :week_visits, false
     .ui.segment
       h3.ui.header
-        | 9. В целях соблюдения прав и  интересов ребёнка (в том числе его  безопасности и здорового развития), мы просим вас сообщить нам следующее:
+        | 8. В целях соблюдения прав и  интересов ребёнка (в том числе его  безопасности и здорового развития), мы просим вас сообщить нам следующее:
       .field.required class=('error' if form_errors[:alcohol].present?)
         = f.label :alcohol, 'Употребляете ли вы алкоголь? Если да, то как часто?'
         = f.text_field :alcohol
@@ -208,9 +236,19 @@
       .field.required class=('error' if form_errors[:disabled_parental_rights].present?)
         = f.label :disabled_parental_rights, 'Были ли вы ранее лишены родительских или опекунских прав? Если да, пожалуйста, конкретизируйте.'
         = f.text_field :disabled_parental_rights
-      .field.required
+      .field.required class=('error' if form_errors[:monthly_meeting].present?)
         label
-          | Согласны ли вы по необходимости заполнять отчёты о проделанной совместно с ребёнком  деятельности ( 1 раз/ месяц)?
+          | Готовы ли вы посещать собрания волонтеров ежемесячно?
+        .fields.radio_button
+          .inline.field.radio.checkbox
+            = f.label :monthly_meeting_true, 'Да'
+            = f.radio_button :monthly_meeting, true
+          .inline.field.radio.checkbox
+            = f.label :monthly_meeting_false, 'Нет'
+            = f.radio_button :monthly_meeting, false
+      .field.required class=('error' if form_errors[:reports].present?)
+        label
+          | Готовы ли вы ежемесячно писать отчеты о своей деятельности?
         .fields.radio_button
           .inline.field.radio.checkbox
             = f.label :reports_true, 'Да'
@@ -218,7 +256,7 @@
           .inline.field.radio.checkbox
             = f.label :reports_false, 'Нет'
             = f.radio_button :reports, false
-      .field.required
+      .field.required class=('error' if form_errors[:photo_rights].present?)
         label
           | Разрешаете ли вы использовать ваши фотографии и комментарии, сделанные в процессе вашего участия в Программе, на информационных носителях Проекта, с целью популяризации идеи Наставничества?
         .fields.radio_button

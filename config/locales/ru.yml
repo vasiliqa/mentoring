@@ -308,7 +308,6 @@ ru:
   activerecord:
     models:
       candidate: Кандидат
-      candidate_children_experience: Опыт с детьми
       candidate_education: Образование
       candidate_family_member: Члены семьи
       orphanage: Учреждение
@@ -335,19 +334,11 @@ ru:
         organization_name: Место работы
         work_contacts: Контактная информация (работа)
         work_position: Должность
-        work_functions: Обязанности
-        work_schedule: Рабочий график
         hobby: Хобби
         martial_status: Семейное положение
         program_role: Участие в программе в качестве
-        program_reason: Причины участия в программе
-        person_character: Полезные качества характера
-        person_information: Описание себя
-        help_reason: Причины для помощи сиротам
         child_age: Возраст детей
         child_gender: Пол детей
-        child_character: Важен ли характер
-        visit_frequency: Частота визитов
         invalid_child: Работа с детьми с ограниченными возможностями
         alcohol: Употребление алкоголя
         tobacco: Употребление табачных изделий
@@ -364,14 +355,27 @@ ru:
         state_comment: Комментарий к статусу
         russian_citizenship: Гражданство РФ
         candidate_educations: Образование
-        candidate_children_experiences: Опыт с детьми
         candidate_family_members: Члены семьи
-      candidate_children_experience:
-        organization_name: Название организации
-        organization_contacts: Контактная информация
-        position: Должность
-        functions: Обязанности
-        children_age: Возраст детей
+        family_attitude: Отношение членов семьи
+        visit_hours: Часы посещения
+        want_new: Хочу попробовать что-то новое
+        plan_be_adoptive_parent: Планирую стать приемным родителем
+        want_be_significant: Хочу быть значимым человеком для кого-то
+        want_get_experience: Хочу получить опыт работы с детьми
+        want_more_kids: Свои дети выросли, хочу принять участие в судьбе других детей
+        want_be_in_team: Хочу быть частью команды
+        want_change_job: Хочу сменить вид деятельности
+        pity_kids: Жаль детей
+        want_pass_experience: Хочу передать свой опыт кому-то
+        maternal_instinct: Материнский инстинкт
+        want_increase_status: Хочу повысить свою значимость / социальный статус
+        foreign_child: Работа с ребенком другой национальности
+        unsolvable_problems: С какими проблемами вы не готовы столкнуться
+        tragic_events: Трагические события в последние 2 года
+        child_emotions: Переживания, связанные с детством
+        life_changes: Существенные изменения в жизни
+        week_visits: Возможность навещать раз в неделю
+        monthly_meeting: Согласие посещать собрания раз в месяц
       candidate_education:
         education: Образование
         specialty: Специальность

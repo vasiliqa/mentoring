@@ -31,6 +31,14 @@ When(/^I choose each radio button with label "(.+)"$/) do |label|
   end
 end
 
+When(/^I choose each radio button inside the table$/) do
+  page.all("table tbody tr").each do |row|
+    within(row) do
+      row.find('input[value="5"]').set(true)
+    end
+  end
+end
+
 When(/^I click on agreement checkbox$/) do
   page.all(".check_box label").each do |element|
     element.click

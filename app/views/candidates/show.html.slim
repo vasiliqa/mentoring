@@ -122,14 +122,9 @@ p#alert = flash[:error]
             = @candidate.work_position
         .row
           .column
-            strong Исполняемые обязанности:
+            strong Возможное время посещения ребёнка:
             br
-            = @candidate.work_functions
-        .row
-          .column
-            strong Текущий рабочий график:
-            br
-            = @candidate.work_schedule
+            = @candidate.visit_hours
 
   .ui.segment
     h3.ui.header 5. Интересы, хобби:
@@ -144,6 +139,8 @@ p#alert = flash[:error]
       .ui.grid
         .row
           .column
+            strong Семейное положение
+            br
             = @candidate.martial_status
         .row
           .column
@@ -173,46 +170,14 @@ p#alert = flash[:error]
                       strong Кем приходится:
                       br
                       = member.relation
-  .ui.segment
-    h3.ui.header 7. Опыт работы с детьми:
-
-    - children_experiences = @candidate.candidate_children_experiences.where.not(organization_name: '')
-
-    - if children_experiences.blank?
-      | Нет данных
-
-    - else
-      - children_experiences.each do |experience|
-        .ui.segment
-          .ui.grid
-            .row
-              .column
-                strong Название организации:
-                br
-                = experience.organization_name
-            .row
-              .column
-                strong Контактная информация:
-                br
-                = experience.organization_contacts
-            .row
-              .column
-                strong Должность:
-                br
-                = experience.position
-            .row
-              .column
-                strong Исполняемые обязанности:
-                br
-                = experience.functions
-            .row
-              .column
-                strong Возрастная группа детей:
-                br
-                = experience.children_age
+        .row
+          .column
+            strong Отношение семьи к наставничеству
+            br
+            = @candidate.family_attitude
 
   .ui.segment
-    h3.ui.header 8. Пожалуйста, как можно подробнее ответьте на следующие вопросы:
+    h3.ui.header 7. Пожалуйста, как можно подробнее ответьте на следующие вопросы:
 
     .ui.segment
       .ui.grid
@@ -221,26 +186,48 @@ p#alert = flash[:error]
             strong Вы хотите участвовать в Программе "Детский дом" в качестве:
             br
             = @candidate.program_role
-        .row
-          .column
-            strong Почему вы хотите стать наставником (волонтером/партнёром)?
-            br
-            = @candidate.program_reason
-        .row
-          .column
-            strong Какие качества вашего характера, особенные знания, навыки и т.д., могут , по вашему мнению, помочь становлению и развитию ребёнка-сироты?
-            br
-            = @candidate.person_character
-        .row
-          .column
-            strong Как бы вы описали (охарактеризовали) сами себя?
-            br
-            = @candidate.person_information
-        .row
-          .column
-            strong Почему вы хотите помогать ребёнку-сироте?
-            br
-            = @candidate.help_reason
+      h5
+        |Оцените по шкале от 1 до 5, что вас привлекает в волонтерской деятельности:
+      table.ui.celled.table
+        thead
+          tr
+            th.six.wide
+            th.two.wide.center.aligned 1 (совсем не важно)
+            th.two.wide.center.aligned 2 (не важно)
+            th.two.wide.center.aligned 3 (достаточно важно)
+            th.two.wide.center.aligned 4 (важно)
+            th.two.wide.center.aligned 5 (основная причина)
+        tbody
+          - { want_new: 'Хочу попробовать что-то новое',
+              plan_be_adoptive_parent: 'Планирую стать приемным родителем',
+              want_be_significant: 'Хочу быть значимым человеком для кого-то',
+              want_get_experience: 'Хочу получить опыт работы с детьми',
+              want_more_kids: 'Свои дети выросли, хочу принять участие в судьбе других детей',
+              want_be_in_team: 'Хочу быть частью команды',
+              want_change_job: 'Хочу сменить вид деятельности',
+              pity_kids: 'Жаль детей',
+              want_pass_experience: 'Хочу передать свой опыт кому-то',
+              maternal_instinct: 'Материнский инстинкт',
+              want_increase_status: 'Хочу повысить свою значимость / социальный статус'\
+            }.each do |field, question|
+            tr
+              td = question
+              td.center.aligned
+                - if @candidate.send(field) == 1
+                  i.checkmark.green.icon
+              td.center.aligned
+                - if @candidate.send(field) == 2
+                  i.checkmark.green.icon
+              td.center.aligned
+                - if @candidate.send(field) == 3
+                  i.checkmark.green.icon
+              td.center.aligned
+                - if @candidate.send(field) == 4
+                  i.checkmark.green.icon
+              td.center.aligned
+                - if @candidate.send(field) == 5
+                  i.checkmark.green.icon
+      .ui.grid
         .row
           .column.six.wide
             strong Ожидаемый возраст ребёнка:
@@ -252,23 +239,43 @@ p#alert = flash[:error]
             = @candidate.child_gender
         .row
           .column
-            strong Насколько важным для вас является характер ребёнка (внешний вид, поведенческие особенности)?
+            strong Готовы ли вы работать с ребенком-инвалидом (физические / ментальные нарушения)?
             br
-            = @candidate.child_character
+            = @candidate.invalid_child
         .row
           .column
-            strong Как часто вы сможете навещать ребенка в учреждении?
+            strong Готовы ли вы работать с ребенком другой национальности?
             br
-            = @candidate.visit_frequency
+            = @candidate.foreign_child
         .row
           .column
-            strong Согласны ли вы взаимодействовать с ребёнком имеющим функциональные ограничения или особенные потребности?
+            strong Как вы думаете, с какими проблемами вы не готовы столкнуться?
             br
-            = @candidate.invalid_child ? 'Да' : 'Нет'
+            = @candidate.unsolvable_problems
+        .row
+          .column
+            strong Происходили ли в вашей жизни в последние 2 года трагические события (тяжелые болезни, утраты, и т.д.)?
+            br
+            = @candidate.tragic_events
+        .row
+          .column
+            strong Есть ли у вас переживания, связанные с вашим детством, отношением с родителями?
+            br
+            = @candidate.child_emotions
+        .row
+          .column
+            strong Планируете ли вы в ближайший год существенные изменения в жизни (переезд, смена работы, изменение семейного статуса, рождение ребенка, и т.д.)?
+            br
+            = @candidate.life_changes
+        .row
+          .column
+            strong Сможете ли вы навещать ребенка раз в неделю?
+            br
+            = @candidate.week_visits ? 'Да' : 'Нет'
 
   .ui.segment
     h3.ui.header
-      | 9. В целях соблюдения прав и интересов ребёнка (в том числе его безопасности и здорового развития),
+      | 8. В целях соблюдения прав и интересов ребёнка (в том числе его безопасности и здорового развития),
         мы просим вас сообщить нам следующее:
 
     .ui.segment
@@ -308,7 +315,12 @@ p#alert = flash[:error]
             = @candidate.disabled_parental_rights
         .row
           .column
-            strong Согласны ли вы по необходимости заполнять отчёты о проделанной совместно с ребёнком деятельности ( 1 раз/ месяц)?
+            strong Готовы ли вы посещать собрания волонтеров ежемесячно?
+            br
+            = @candidate.monthly_meeting ? 'Да' : 'Нет'
+        .row
+          .column
+            strong Готовы ли вы ежемесячно писать отчеты о своей деятельности?
             br
             = @candidate.reports ? 'Да' : 'Нет'
         .row

@@ -10,6 +10,7 @@ Feature: new candidate
     And I fill in all "email" inputs with "test@example.com"
     And I select option from each select
     And I choose each radio button with label "Да"
+    And I choose each radio button inside the table
     And I click on agreement checkbox
     And I click to the submit button
     Then I should see success message

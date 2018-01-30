@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030173402) do
+ActiveRecord::Schema.define(version: 20180129153103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,18 +53,6 @@ ActiveRecord::Schema.define(version: 20171030173402) do
     t.index ["owner_id"], name: "index_books_on_owner_id"
   end
 
-  create_table "candidate_children_experiences", id: :serial, force: :cascade do |t|
-    t.integer "candidate_id"
-    t.string "organization_name"
-    t.string "organization_contacts"
-    t.string "position"
-    t.text "functions"
-    t.string "children_age"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["candidate_id"], name: "index_candidate_children_experiences_on_candidate_id"
-  end
-
   create_table "candidate_educations", id: :serial, force: :cascade do |t|
     t.integer "candidate_id"
     t.string "education"
@@ -101,20 +89,12 @@ ActiveRecord::Schema.define(version: 20171030173402) do
     t.string "organization_name"
     t.string "work_contacts"
     t.string "work_position"
-    t.text "work_functions"
-    t.string "work_schedule"
     t.text "hobby"
     t.string "martial_status"
     t.string "program_role"
-    t.text "program_reason"
-    t.text "person_character"
-    t.text "person_information"
-    t.text "help_reason"
     t.string "child_age"
     t.string "child_gender"
-    t.text "child_character"
-    t.string "visit_frequency"
-    t.boolean "invalid_child"
+    t.text "invalid_child"
     t.string "alcohol"
     t.string "tobacco"
     t.string "psychoactive"
@@ -129,6 +109,26 @@ ActiveRecord::Schema.define(version: 20171030173402) do
     t.datetime "updated_at", null: false
     t.text "state_comment"
     t.boolean "russian_citizenship"
+    t.text "family_attitude"
+    t.text "visit_hours"
+    t.integer "want_new"
+    t.integer "plan_be_adoptive_parent"
+    t.integer "want_be_significant"
+    t.integer "want_get_experience"
+    t.integer "want_more_kids"
+    t.integer "want_be_in_team"
+    t.integer "want_change_job"
+    t.integer "pity_kids"
+    t.integer "want_pass_experience"
+    t.integer "maternal_instinct"
+    t.integer "want_increase_status"
+    t.text "foreign_child"
+    t.text "unsolvable_problems"
+    t.text "tragic_events"
+    t.text "child_emotions"
+    t.text "life_changes"
+    t.boolean "week_visits"
+    t.boolean "monthly_meeting"
   end
 
   create_table "children", id: :serial, force: :cascade do |t|
