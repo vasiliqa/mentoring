@@ -24,7 +24,7 @@ RSpec.describe MainController, type: :controller do
     end
   end
 
-  describe 'get #friendship' do
+  xdescribe 'get #friendship' do
     context 'when there are no friendly children' do
       it 'responds with 200' do
         get :friendship
