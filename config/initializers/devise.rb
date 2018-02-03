@@ -12,7 +12,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = '"Детский дом" <vasiliqa13@gmail.com>'
+  config.mailer_sender = '"Проект Детский дом" <nastavnichestvo@inbox.ru>'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
