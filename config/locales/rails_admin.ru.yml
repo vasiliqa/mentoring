@@ -18,7 +18,7 @@ ru:
       ends_with: 'Заканчивается на'
     loading: "Загрузка..."
     home:
-      name: "Главная"
+      name: "Основной сайт"
     pagination:
       previous: "&laquo; Предыдущая"
       next: "Следующая &raquo;"
@@ -58,7 +58,7 @@ ru:
     actions:
       dashboard:
         title: "Управление сайтом"
-        menu: "Панель управления"
+        menu: "|"
         breadcrumb: "Панель управления"
       index:
         title: "%{model_label_plural}"

@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   root 'main#index'
-  get 'friendship' => 'main#friendship'
   get 'about' => 'main#about'
   get 'contacts' => 'main#contacts'
 

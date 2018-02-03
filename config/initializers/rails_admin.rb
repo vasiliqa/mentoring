@@ -1,4 +1,6 @@
 RailsAdmin.config do |config|
+  config.parent_controller = ApplicationController.to_s
+  config.main_app_name = ["Детский дом", "Админка"]
 
   # == Devise ==
   config.authenticate_with do
@@ -19,9 +21,89 @@ RailsAdmin.config do |config|
     edit
     delete
     show_in_app
+  end
+  config.included_models = [
+    'Album',
+    'Book',
+    'Candidate',
+    'CandidateEducation',
+    'CandidateFamilyMember',
+    'Child',
+    'Comment',
+    'Meeting',
+    'Orphanage',
+    'Photo',
+    'Report',
+    'Role',
+    'User'
+  ]
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+  invisible_models = [
+    'Album', 'Book', 'Candidate', 'CandidateEducation', 'CandidateFamilyMember', 'Comment',
+    'Meeting', 'Photo', 'Report', 'Role'
+  ]
+
+  invisible_models.each do |model|
+    config.model model do
+      visible false
+    end
+  end
+
+  config.model 'Child' do
+    edit do
+      field :first_name
+      field :last_name
+      field :middle_name
+      field :birthdate
+      field :description
+      field :avatar
+      field :mentor do
+        inline_add false
+        inline_edit false
+      end
+      field :orphanage do
+        inline_add false
+        inline_edit false
+      end
+    end
+  end
+
+  config.model 'Orphanage' do
+    edit do
+      field :name
+      field :address
+      field :children do
+        inline_add false
+      end
+      field :users do
+        inline_add false
+      end
+    end
+  end
+
+  config.model 'User' do
+    edit do
+      field :email
+      field :password
+      field :password_confirmation
+      field :first_name
+      field :last_name
+      field :middle_name
+      field :avatar
+      field :curator do
+        inline_add false
+        inline_edit false
+      end
+      field :orphanage do
+        inline_add false
+        inline_edit false
+      end
+      field :children do
+        inline_add false
+      end
+      field :roles do
+        inline_add false
+      end
+    end
   end
 end

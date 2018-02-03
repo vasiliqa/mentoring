@@ -64,7 +64,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { host: 'vasiliqa-mentoring.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'nastavnik24.ru' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
       address:              'smtp.gmail.com',

@@ -11,7 +11,7 @@
 
 class Orphanage < ApplicationRecord
   has_many :children, dependent: :destroy
-  has_many :users
+  has_many :users, dependent: :nullify
 
   validates :name, presence: true, uniqueness: true
 end

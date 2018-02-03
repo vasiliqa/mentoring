@@ -182,7 +182,7 @@
         .two.fields
           .field.required class=('error' if form_errors[:child_age].present?)
             = f.label :child_age, 'Возраст'
-            = f.number_field :child_age, min: 12, max: 18
+            = f.number_field :child_age, min: 7, max: 18
           .field.required class=('error' if form_errors[:child_gender].present?)
             = f.label :child_gender, 'Пол'
             = f.collection_select(:child_gender, Candidate::CHILD_GENDERS, :to_s, :to_s, { prompt: 'Выбрать...' })

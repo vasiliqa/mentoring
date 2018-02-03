@@ -2,9 +2,9 @@ class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
   protect_from_forgery with: :exception
 
-  http_basic_authenticate_with name: 'mentoring', password: 'civility_chair_cube_aloe' if Rails.env == 'production'
-
   before_action :main_ability
+  before_action :reload_rails_admin, if: :rails_admin_path?
+
   helper_method :mailbox, :unread_mails_count, :children_for_friendship
 
   def mailbox
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    current_user.has_role?(:admin) ? rails_admin_path : user_path(current_user)
+    user_path(current_user)
   end
 
   private
@@ -39,5 +39,22 @@ class ApplicationController < ActionController::Base
 
   def main_ability
     @main_ability ||= Ability.new(current_user)
+  end
+
+  def reload_rails_admin
+    models = [
+      'Album', 'Book', 'Candidate', 'CandidateEducation', 'CandidateFamilyMember', 'Child',
+      'Comment', 'Meeting', 'Orphanage', 'Photo', 'Report', 'Role', 'User'
+    ]
+    models.each do |m|
+      RailsAdmin::Config.reset_model(m)
+    end
+    RailsAdmin::Config::Actions.reset
+
+    load("#{Rails.root}/config/initializers/rails_admin.rb")
+  end
+
+  def rails_admin_path?
+    Rails.env.development? && controller_path =~ /rails_admin/
   end
 end
