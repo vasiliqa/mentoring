@@ -50,11 +50,16 @@ RailsAdmin.config do |config|
   end
 
   config.model 'Child' do
+    object_label_method do
+      :children_name
+    end
     edit do
       field :first_name
       field :last_name
       field :middle_name
-      field :birthdate
+      field :birthdate do
+        datepicker_options keyBinds: { t: nil }, format: parser.to_momentjs
+      end
       field :description
       field :avatar
       field :mentor do
@@ -104,6 +109,12 @@ RailsAdmin.config do |config|
       field :roles do
         inline_add false
       end
+    end
+  end
+
+  Child.class_eval do
+    def children_name
+      "#{first_name} #{middle_name} #{last_name}"
     end
   end
 end
