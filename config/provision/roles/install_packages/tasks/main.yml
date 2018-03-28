@@ -1,0 +1,42 @@
+- name: 'apt | update'
+  action: 'apt update_cache=yes'
+  tags: apt_update
+
+- name: 'apt | install system'
+  apt: name={{ item }} state=present
+  with_items:
+    - 'git'
+    - 'wget'
+    - 'curl'
+    - 'imagemagick'
+    - 'libssl1.0-dev'
+    - 'nodejs'
+    - 'libsqlite3-dev'
+    - 'bison'
+    - 'htop'
+  tags: apt_install
+
+- name: 'apt | install rvm dependencies'
+  apt: name={{ item }} state=present
+  with_items:
+    - 'build-essential'
+    - 'gawk'
+    - 'autoconf'
+    - 'libyaml-dev'
+    - 'libreadline6-dev'
+    - 'libgdbm-dev'
+    - 'libncurses5-dev'
+    - 'libffi-dev'
+    - 'libpq-dev'
+    - 'libgmp-dev'
+    - 'libmagickwand-dev'
+    - 'sqlite3'
+  tags: rvm_install
+
+- name: Add rules to logrotate
+  template:
+    src=logrotate.rules
+    dest=/etc/logrotate.d/{{ app_name }}_{{ app_stage }}
+    owner=root
+    group=root
+    mode=0644

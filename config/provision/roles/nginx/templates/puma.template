@@ -1,0 +1,3 @@
+upstream puma_{{ app_stage }} {
+  server unix:///home/{{ app_name }}/apps/{{ app_name }}_{{ app_stage }}/shared/tmp/sockets/{{ app_name }}_{{ app_stage }}-puma.sock;
+}

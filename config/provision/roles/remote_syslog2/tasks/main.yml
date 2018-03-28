@@ -1,0 +1,21 @@
+- name: Check if remote_syslog2 is installed
+  command: dpkg-query -W remote-syslog2_0.19_amd64.deb
+  register: remote_syslog_check_deb
+  failed_when: remote_syslog_check_deb.rc > 1
+  changed_when: remote_syslog_check_deb.rc == 1
+
+- name: Download
+  get_url:
+    url='https://github.com/papertrail/remote_syslog2/releases/download/v0.19/remote-syslog2_0.19_amd64.deb'
+    dest='/tmp/remote-syslog2_0.19_amd64.deb'
+  when: remote_syslog_check_deb.rc == 1
+
+- name: Install
+  apt: deb='/tmp/remote-syslog2_0.19_amd64.deb'
+  when: remote_syslog_check_deb.rc == 1
+
+- name: Copy config to server
+  template: src='log_files.yml' dest='/etc/log_files.yml'
+
+- name: Restart service
+  action: service name=remote_syslog state=restarted

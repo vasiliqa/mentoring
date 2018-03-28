@@ -1,0 +1,34 @@
+- name: Install
+  apt: pkg=redis-server state=latest
+
+- name: Ensure started
+  service: name=redis-server state=started enabled=yes
+
+# - name: Ensure Redis configuration
+#   template:
+#     src=redis.conf.j2
+#     dest=/etc/redis/redis.conf
+#     owner=root
+#     group=root
+#     mode=0644
+#   tags: ensure_redis_config
+
+- name: Set sysctl variable
+  sysctl:
+    name: vm.overcommit_memory
+    value: 1
+    sysctl_set: yes
+    state: present
+    reload: yes
+
+- name: Add rules to logrotate
+  template:
+    src=logrotate.rules
+    dest=/etc/logrotate.d/redis
+    owner=root
+    group=root
+    mode=0644
+
+- name: Redis Restart
+  service: name=redis-server state=restarted enabled=yes
+  tags: redis_restart

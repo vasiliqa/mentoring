@@ -1,0 +1,27 @@
+- name: common conditions
+  hosts: all
+  gather_facts: false
+  user: root
+
+  roles:
+    - install_packages
+    - user
+    - postgresql
+    - nginx
+    - redis
+    # - remote_syslog2 # https://github.com/papertrail/remote_syslog2
+
+- name: Install ruby for single user via rvm support
+  hosts: all
+  user: root
+
+  roles:
+    - {
+        role: rvm_io.ruby,
+        tags: ruby,
+        rvm1_rubies: ['ruby-{{ ruby_version }}'],
+        rvm1_user: '{{ deploy_user }}',
+        rvm1_install_flags: --auto-dotfiles --user-install,
+        # Use available libs, fail if some are missing.
+        rvm1_autolib_mode: 2,
+      }

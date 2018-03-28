@@ -1,0 +1,9 @@
+/home/{{ app_name }}/apps/{{ app_name }}_{{ app_stage }}/shared/log/*.log {
+  daily
+  missingok
+  rotate 3
+  compress
+  delaycompress
+  notifempty
+  copytruncate
+}

@@ -1,0 +1,30 @@
+---
+- name: install
+  apt: pkg=nginx state=latest
+
+- name: check config
+  command: 'test -f /etc/nginx/sites-enabled/{{ app_name }}_{{ app_stage }}.conf'
+  register: nginx_config_copied
+  ignore_errors: yes
+
+- name: remove default config
+  file: path=/etc/nginx/sites-enabled/default state=absent
+
+- name: createdir
+  file: path=/etc/nginx/sites-enabled/ state=directory
+  when: 'nginx_config_copied is failed'
+
+- name: copy config
+  template:
+    src={{ app_stage }}.conf
+    dest=/etc/nginx/sites-enabled/{{ app_name }}_{{ app_stage }}.conf
+    owner=root
+    group=root
+    mode=0644
+  register: nginx_config_copied
+  tags: update_nginx_conf
+
+- name: restart service
+  service: name=nginx state=restarted
+  when: nginx_config_copied is failed
+  tags: nginx_restart

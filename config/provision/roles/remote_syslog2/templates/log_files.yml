@@ -1,0 +1,7 @@
+files:
+  - /home/sola/apps/sola_develop/shared/log/lograge_develop.log
+  - /home/sola/apps/sola_master/shared/log/lograge_master.log
+destination:
+  host: logs3.papertrailapp.com
+  port: 21717
+  protocol: tls

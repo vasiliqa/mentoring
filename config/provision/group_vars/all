@@ -1,0 +1,10 @@
+app_name: mentoring
+deploy_user: mentoring
+deploy_user_group: '{{ deploy_user }}'
+deploy_user_home_dir: '/home/{{ deploy_user }}'
+deploy_directory: '{{ deploy_user_home_dir }}/apps/{{ app_name }}_{{ app_stage }}'
+config_directory: '{{ deploy_directory }}/shared/config'
+pg_version: 9.6
+ruby_version: 2.3.3
+ansible_port: 22
+repo_url: 'git@github.com:vasiliqa/mentoring.git'
