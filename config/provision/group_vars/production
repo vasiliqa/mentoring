@@ -1,2 +1,5 @@
 app_stage: 'production'
 app_db_name: 'mentoring_production'
+puma_min_threads: 4
+puma_max_threads: 16
+puma_workers: 0

@@ -34,13 +34,15 @@ gem 'uglifier'
 group :development do
   gem 'annotate'
   gem 'awesome_print'
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
-  gem 'capistrano-sidekiq'
-  gem 'capistrano3-unicorn', require: false
   gem 'spring'
+
+  # Deployments stuff
+  gem 'capistrano', '3.10.0', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rvm', require: false
+  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-puma', require: false
 end
 
 group :development, :test do
@@ -60,8 +62,4 @@ group :test do
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-end
-
-group :production do
-  gem 'unicorn'
 end

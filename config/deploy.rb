@@ -1,51 +1,95 @@
 # config valid only for current version of Capistrano
-lock '3.4.0'
+lock '3.10.0'
 
-set :application, 'mentoring'
-set :repo_url, 'https://github.com/KernelCorp/mentoring.git'
-set :sidekiq_pid, File.join(shared_path, 'pids', 'sidekiq.pid')
+ip_server = IO.readlines("config/provision/#{fetch(:stage)}")[1].delete!("\n")
+DEPLOY_VARS = YAML.load_file("config/provision/group_vars/#{fetch(:stage)}")
+PROVISION_VARS = YAML.load_file('config/provision/group_vars/all')
 
-set :rvm_ruby_version, '2.3.3'
+set :ssh_port, DEPLOY_VARS['ansible_port'] || PROVISION_VARS['ansible_port']
 
-set :password, ask('Server password:', nil, echo: false)
+server ip_server, port: fetch(:ssh_port), roles: [:web, :app, :db], primary: true
+
+set :repo_url, DEPLOY_VARS['repo_url'] || PROVISION_VARS['repo_url']
+set :hostname, DEPLOY_VARS['app_hostname'] || PROVISION_VARS['app_hostname']
+set :branch, DEPLOY_VARS['app_branch']
+
+set :app_name, PROVISION_VARS['app_name']
+set :user, PROVISION_VARS['deploy_user']
+set :application, "#{fetch(:app_name)}_#{fetch(:stage)}"
+
+set :puma_threads, [DEPLOY_VARS['puma_threads_min'], DEPLOY_VARS['puma_threads_max']]
+set :puma_workers, DEPLOY_VARS['puma_workers']
+
+# Don't change these unless you know what you're doing
+set :pty,             false # false value required by sidekiq gem
+set :use_sudo,        false
+set :deploy_via,      :remote_cache
+set :ssh_options,     forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa)
+set :puma_preload_app, true
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true
+set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
+
+set :sidekiq_config, -> { File.join(shared_path, 'config', 'sidekiq.yml') }
+
 # Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
-# Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
-
-# Default value for :scm is :git
-# set :scm, :git
-
-# Default value for :format is :pretty
-# set :format, :pretty
-
-# Default value for :log_level is :debug
-# set :log_level, :debug
-
-# Default value for :pty is false
-# set :pty, true
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'pids', 'tmp/cache', 'vendor/bundle', 'public/system')
 
-# Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+set :keep_releases, 5
 
-# Default value for keep_releases is 5
-# set :keep_releases, 5
-
-
-set :unicorn_pid, "#{deploy_to}/shared/pids/unicorn.pid"
-
-after 'deploy:publishing', 'deploy:restart'
-after "deploy:restart", "deploy:cleanup"
-
-namespace :deploy do
-  task :restart do
-    invoke 'unicorn:restart'
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
   end
 
+  before :start, :make_dirs
+end
+
+namespace :deploy do
+  desc 'Make sure local git is in sync with remote.'
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
+        puts 'Run `git push` to sync changes.'
+        exit
+      end
+    end
+  end
+
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
+  before :starting,  :check_revision
+  after  :finishing, :compile_assets
+  after  :finishing, :cleanup
+  after  :finishing, :restart
 end
