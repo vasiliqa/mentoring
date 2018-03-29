@@ -9,8 +9,6 @@
 /public/system/*
 /public/assets/*
 
-/config/database.yml
-/config/secrets.yml
 
 .idea
 /coverage/*
