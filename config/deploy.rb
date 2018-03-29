@@ -11,7 +11,6 @@ server ip_server, port: fetch(:ssh_port), roles: [:web, :app, :db], primary: tru
 
 set :repo_url, DEPLOY_VARS['repo_url'] || PROVISION_VARS['repo_url']
 set :hostname, DEPLOY_VARS['app_hostname'] || PROVISION_VARS['app_hostname']
-set :branch, DEPLOY_VARS['app_branch']
 
 set :app_name, PROVISION_VARS['app_name']
 set :user, PROVISION_VARS['deploy_user']
@@ -39,7 +38,6 @@ set :sidekiq_config, -> { File.join(shared_path, 'config', 'sidekiq.yml') }
 
 # Default branch is :master
 set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, []).push()
@@ -100,6 +98,6 @@ namespace :deploy do
   end
 
   before :starting,  :check_revision
-  before :migrate,   :symlink_env_file # make sure to keep it up-to-date with real secrets
-  # before :migrate, :setup_db # WARN: use this only for the first deploy
+  before :setup_db,   :symlink_env_file # make sure to keep it up-to-date with real secrets
+  before :migrate, :setup_db # WARN: use this only for the first deploy
 end
