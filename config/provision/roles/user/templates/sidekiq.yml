@@ -1,6 +1,0 @@
-:queues:
-  - default
-  - mailers
-:concurrency: 25
-production:
-  :concurrency: 20

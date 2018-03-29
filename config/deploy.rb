@@ -42,7 +42,7 @@ set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push()
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'pids', 'tmp/cache', 'vendor/bundle', 'public/system')
@@ -73,11 +73,15 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
+  desc 'Create db and load shema. WARN: use it only for the first Deploy'
+  task :setup_db do
     on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
+      within release_path do
+        execute :bundle, "exec rake RAILS_ENV=#{fetch(:rails_env)} \
+          db:create"
+        execute :bundle, "exec rake RAILS_ENV=#{fetch(:rails_env)} DISABLE_DATABASE_ENVIRONMENT_CHECK=1 \
+          db:schema:load"
+      end
     end
   end
 
@@ -88,8 +92,14 @@ namespace :deploy do
     end
   end
 
+  desc "Symlink shared env file"
+  task :symlink_env_file do
+    on roles(:app) do
+      execute "ln -s #{deploy_to}/shared/config/environment.#{fetch(:stage)} #{release_path}/.env"
+    end
+  end
+
   before :starting,  :check_revision
-  after  :finishing, :compile_assets
-  after  :finishing, :cleanup
-  after  :finishing, :restart
+  before :migrate,   :symlink_env_file # make sure to keep it up-to-date with real secrets
+  # before :migrate, :setup_db # WARN: use this only for the first deploy
 end

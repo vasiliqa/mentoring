@@ -4,6 +4,7 @@
 - name: Ensure started
   service: name=redis-server state=started enabled=yes
 
+# TODO: get custom config to work
 # - name: Ensure Redis configuration
 #   template:
 #     src=redis.conf.j2

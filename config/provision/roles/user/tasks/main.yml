@@ -31,5 +31,4 @@
 - name: copy some config files, needed for deploy and start application
   template: src={{ item.src }} dest={{ item.dest }}
   with_items:
-    - { src: 'sidekiq.yml', dest: '{{ deploy_directory }}/shared/config/' }
     - { src: 'environment.example', dest: '{{ deploy_directory }}/shared/config/environment.{{ app_stage }}' }

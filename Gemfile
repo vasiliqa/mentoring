@@ -12,6 +12,7 @@ gem 'cocoon'
 gem 'coffee-rails'
 gem 'devise'
 gem 'dropzonejs-rails'
+gem 'dotenv-rails' # ...load environment variables from `.env`
 gem 'jbuilder'
 gem 'jquery-datetimepicker-rails'
 gem 'jquery-rails'
