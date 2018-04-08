@@ -1,5 +1,16 @@
-# See http://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
-#
-# To ban all spiders from the entire site uncomment the next two lines:
-# User-agent: *
-# Disallow: /
+User-agent: *
+Host: http://nastavnik24.ru
+Disallow: /admin
+Disallow: /users
+Disallow: /activities
+Disallow: /candidates
+Allow:    /candidates/new
+Disallow: /mailbox
+Disallow: /conversations
+Disallow: /orphanages
+Disallow: /children
+Disallow: /books
+Disallow: /albums
+Disallow: /photos
+Disallow: /meetings
+Disallow: /reports
