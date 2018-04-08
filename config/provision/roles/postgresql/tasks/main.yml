@@ -10,7 +10,7 @@
   tags: pg_repo
 
 - name: Add PostgreSQL repo
-  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main'
+  apt_repository: repo='deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main'
   tags: pg_repo
 
 - name: Install PostgreSQL
