@@ -2,7 +2,25 @@ h1 Контакты:
 
 .ui.three.cards
   .card
-    .image = image_tag 'contacts/vasilina.jpg'
+    .image = image_tag 'contacts/ekaterina_anikeeva.jpg'
+    .content
+      .header Екатерина Аникеева
+      .meta Куратор детского дома №1
+
+  .card
+    .image = image_tag 'contacts/liubov_sabitova.jpg'
+    .content
+      .header Любовь Сабитова
+      .meta Куратор детского дома №2
+
+  .card
+    .image = image_tag 'contacts/sabina_zakieva.jpg'
+    .content
+      .header Сабина Закиева
+      .meta Куратор детского дома "Самоцветы"
+
+  .card
+    .image = image_tag 'contacts/vasilina_stepanova.jpg'
     .content
       .header Василина Степанова
       .meta Руководитель программы
@@ -11,13 +29,8 @@ h1 Контакты:
     .extra.content = mail_to 'burivouh@mail.ru'
 
   .card
+    .image = image_tag 'main_page/happy_logo.png'
     .content
-      = link_to 'https://happydeti24.ru/', target: '_blank' do
-        .ui.image.medium = image_tag 'main_page/happy_logo.png'
-      br
-      br
-      br
-      br
       .description
         p
           | Адрес фонда: 660135, г. Красноярск
@@ -30,8 +43,5 @@ h1 Контакты:
           = mail_to 's-deti2014@mail.ru'
         p
           = link_to 'https://happydeti24.ru/', 'https://happydeti24.ru/', target: '_blank'
-        p
-          | Директор фонда:
-          br
-          | Светлана Ковалёва
-        br
+    .extra.content
+      | Директор фонда: Светлана Ковалёва
