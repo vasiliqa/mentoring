@@ -405,7 +405,6 @@ ru:
         roles: Роли
       child:
         birthdate: Дата рождения
-        is_friendly: Хочет дружить
       orphanage:
         name: Название
         address: Адрес

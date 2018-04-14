@@ -34,9 +34,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :orphanages
-  resources :children
-
   resources :books do
     resources :comments
   end

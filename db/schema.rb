@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(version: 20180129153103) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"
-    t.boolean "is_friendly", default: false
     t.string "avatar_file_name"
     t.string "avatar_content_type"
     t.integer "avatar_file_size"

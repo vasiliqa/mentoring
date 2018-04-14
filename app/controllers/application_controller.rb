@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :main_ability
   before_action :reload_rails_admin, if: :rails_admin_path?
 
-  helper_method :mailbox, :unread_mails_count, :children_for_friendship
+  helper_method :mailbox, :unread_mails_count
 
   def mailbox
     current_user.mailbox
@@ -13,14 +13,6 @@ class ApplicationController < ActionController::Base
 
   def unread_mails_count
     mailbox.receipts(is_read: false).count
-  end
-
-  def children_for_friendship
-    if user_signed_in?
-      Child.accessible_by(current_ability).want_to_be_friends.order(id: :asc)
-    else
-      []
-    end
   end
 
   def after_sign_in_path_for(resource)

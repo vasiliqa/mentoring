@@ -12,7 +12,6 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  description         :text
-#  is_friendly         :boolean          default(FALSE)
 #  avatar_file_name    :string
 #  avatar_content_type :string
 #  avatar_file_size    :integer
@@ -33,8 +32,6 @@ class Child < ApplicationRecord
   validates_attachment_content_type :avatar, content_type: %w(image/jpeg image/jpg image/png image/gif)
 
   validates :first_name, :last_name, :birthdate, presence: true
-
-  scope :want_to_be_friends, -> { where(is_friendly: true) }
 
   def name
     first_name
