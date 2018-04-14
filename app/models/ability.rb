@@ -60,12 +60,13 @@ class Ability
   end
 
   private
-    def common_access(user)
-      can [:read, :create], Comment
-      can :read, Album
-      can :read, Photo
-      can :read, User, orphanage_id: user.orphanage_id unless user.orphanage_id == nil
-      can :read, user
-      can :update, user
-    end
+
+  def common_access(user)
+    can [:read, :create], Comment
+    can :read, Album
+    can :read, Photo
+    can :read, User, orphanage_id: user.orphanage_id unless user.orphanage_id == nil
+    can :read, user
+    can :update, user
+  end
 end

@@ -5,7 +5,9 @@ https://github.com/sj26/mailcatcher:
 Please don't put mailcatcher into your Gemfile. It will conflict with your applications gems at some point.
 
 Configure server:
+Change ip in config/provision/production if needed
 local - ansible-playbook --inventory=config/provision/production config/provision/provision.yml
+Don't forget to add it to gmail.com white list
 
 remote - ssh root@server_ip
 nano ../home/mentoring/apps/mentoring_production/shared/config/environment.production
@@ -28,4 +30,4 @@ tail -f production.log
 
 Rails console
 ssh mentoring@207.154.245.159
-bundle exec rails c
+~/apps/mentoring_production/current$ bundle exec rails console production
