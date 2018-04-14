@@ -403,6 +403,7 @@ ru:
         messages: Сообщения
         receipts: Уведомления
         roles: Роли
+        display_on_site: Отображать на сайте
       child:
         birthdate: Дата рождения
       orphanage:

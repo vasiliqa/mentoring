@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'about' => 'main#about'
   get 'contacts' => 'main#contacts'
+  get 'mentors' => 'main#mentors'
 
   devise_for :users, skip: [:registrations]
   devise_scope :user do

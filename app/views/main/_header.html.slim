@@ -7,6 +7,8 @@
 .menu_item
   = active_link_to 'Присоединиться', new_candidate_path
 .menu_item
+  = active_link_to 'Наставники', mentors_path
+.menu_item
   = active_link_to 'Контакты', contacts_path
 .menu_item
   - if user_signed_in?

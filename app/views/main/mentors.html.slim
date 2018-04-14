@@ -1,0 +1,19 @@
+.slider_block
+  .dat_slider
+    ul.bxslider
+      - @mentors.each do |mentor|
+        li
+          .ui.items.bxslide
+            .item
+              .ui.image.medium
+                - if mentor.avatar.present?
+                  = image_tag mentor.avatar.url(:original, false)
+                - else
+                  = image_tag 'image.png'
+
+              .content
+                .header = mentor.first_name + ' ' + mentor.last_name
+                .description
+                  == simple_format(mentor.description)
+          br
+          br

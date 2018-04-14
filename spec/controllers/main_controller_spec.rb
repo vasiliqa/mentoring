@@ -24,18 +24,18 @@ RSpec.describe MainController, type: :controller do
     end
   end
 
-  xdescribe 'get #friendship' do
-    context 'when there are no friendly children' do
+  describe 'get #mentors' do
+    context 'when there are no mentors to display' do
       it 'responds with 200' do
-        get :friendship
+        get :mentors
         expect(response.status).to eq(200)
       end
     end
 
-    context 'when there is at least one friendly child' do
+    context 'when there is at least one mentors to display' do
       it 'responds with 200' do
-        create :child, is_friendly: true
-        get :friendship
+        create :user, display_on_site: true
+        get :mentors
         expect(response.status).to eq(200)
       end
     end

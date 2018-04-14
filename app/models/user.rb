@@ -24,6 +24,8 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  description            :text
+#  display_on_site        :boolean          default(FALSE)
 #
 # Indexes
 #
@@ -54,6 +56,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :first_name, :last_name, presence: true
+
+  scope :to_display, -> { where(display_on_site: true) }
 
   def name
     full_name

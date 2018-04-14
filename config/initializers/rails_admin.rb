@@ -94,6 +94,8 @@ RailsAdmin.config do |config|
       field :first_name
       field :last_name
       field :middle_name
+      field :description
+      field :display_on_site
       field :avatar
       field :curator do
         inline_add false
