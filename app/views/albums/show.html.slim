@@ -41,8 +41,9 @@ p#alert = alert
           .ui.small.images
             - @photos.each do |photo|
               .ui.image.spaced
-                = link_to photo, method: :delete, data: { confirm: 'Удалить эту фотографию из альбома?' } do
-                  .ui.red.top.right.attached.label &times;
+                - if can? :destroy, photo
+                  = link_to photo, method: :delete, data: { confirm: 'Удалить эту фотографию из альбома?' } do
+                    .ui.red.top.right.attached.label &times;
                 = link_to photo do
                   = image_tag photo.image.url(:original, false)
 
