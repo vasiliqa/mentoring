@@ -4,8 +4,6 @@ Please run locally `bundle install mailcatcher`
 https://github.com/sj26/mailcatcher:
 Please don't put mailcatcher into your Gemfile. It will conflict with your applications gems at some point.
 
-SwitchUser and RailsAdmin are conflicted by some reason in specs. Comment out switch config and switch_user_select in main.html.slim before rspec spec
-
 Configure server:
 Change ip in config/provision/production if needed
 local - ansible-playbook --inventory=config/provision/production config/provision/provision.yml

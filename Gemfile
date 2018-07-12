@@ -29,6 +29,7 @@ gem 'sdoc', group: :doc
 gem 'semantic-ui-sass'
 gem 'sidekiq'
 gem 'slim-rails'
+gem 'switch_user'
 gem 'turbolinks'
 gem 'uglifier'
 
@@ -36,7 +37,6 @@ group :development do
   gem 'annotate'
   gem 'awesome_print'
   gem 'spring'
-  gem 'switch_user'
 
   # Deployments stuff
   gem 'capistrano', '3.10.0', require: false
