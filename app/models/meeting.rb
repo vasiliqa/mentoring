@@ -16,14 +16,14 @@
 #
 
 class Meeting < ApplicationRecord
+  include AASM
+  include PublicActivity::Model
+  tracked only: [:create], owner: :mentor
+
   belongs_to :child
   belongs_to :mentor, foreign_key: :mentor_id, class_name: 'User'
   has_one :report
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
-
-  include AASM
-  include PublicActivity::Model
-  tracked only: [:create], owner: :mentor
 
   validates :date, presence: true
   validate :date_in_future, on: :create

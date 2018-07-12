@@ -20,13 +20,13 @@
 #
 
 class Photo < ApplicationRecord
+  include PublicActivity::Model
+  tracked only: [:create], owner: :user
+
   belongs_to :album
   belongs_to :user
   has_many :comments, as: :commentable
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
-
-  include PublicActivity::Model
-  tracked only: [:create], owner: :user
 
   has_attached_file :image
   validates_attachment_presence :image

@@ -22,12 +22,12 @@
 #
 
 class Report < ApplicationRecord
-  belongs_to :meeting
-  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
-
   include AASM
   include PublicActivity::Model
   tracked only: [:create], owner: -> (controller, model) { model.meeting.mentor }
+
+  belongs_to :meeting
+  has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
 
   validates :duration, :aim, :short_description, :result, :feelings, :questions, :next_aim, :other_comments, presence: true
 
