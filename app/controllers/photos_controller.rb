@@ -33,7 +33,7 @@ class PhotosController < ApplicationController
     album = @photo.album
     path = album.present? ? album_path(album) : albums_path
     @photo.destroy
-    redirect_to path, notice: 'Photo was successfully destroyed.'
+    redirect_to path, notice: 'Фотография была успешно удалена'
   end
 
   private

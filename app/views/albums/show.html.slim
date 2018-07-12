@@ -13,12 +13,19 @@ p#alert = alert
     .column.six.wide
       - if can? :edit, @album
         = render partial: 'photos/dropzone', locals: {album: @album, photo: @album.photos.new}
-  - if can? :edit, @album
-    .row
-      .column
+  .row
+    - if can? :edit, @album
+      .column.four.wide
         = link_to edit_album_path(@album), class: 'ui button green' do
           i.icon.edit
           | Редактировать альбом
+
+    - if can? :destroy, @album
+      .column.four.wide
+        = link_to @album, method: :delete, data: { confirm: 'Удалить этот альбом?' },
+          class: 'ui button red' do
+            i.icon.trash
+            | Удалить альбом
 
   .row
     .column
@@ -33,7 +40,10 @@ p#alert = alert
         .ui.segment
           .ui.small.images
             - @photos.each do |photo|
-              = link_to photo do
-                = image_tag photo.image.url(:original, false), class: 'ui image'
+              .ui.image.spaced
+                = link_to photo, method: :delete, data: { confirm: 'Удалить эту фотографию из альбома?' } do
+                  .ui.red.top.right.attached.label &times;
+                = link_to photo do
+                  = image_tag photo.image.url(:original, false)
 
 == render 'back'
