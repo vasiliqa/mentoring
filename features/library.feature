@@ -10,7 +10,6 @@ Feature: Meetings
       And a user with email: "zoidberg@example.com" and role "curator" for orphanage "Futurama"
       And a user with email: "bender@rodriguez.com" and role "mentor" for child "Fry" and curator: "zoidberg@example.com"
 
-
   Scenario: Curator add a new book
     Given I signed in as user with email: "zoidberg@example.com"
     When I go to "/books"
@@ -25,12 +24,9 @@ Feature: Meetings
   Scenario: Mentor see books
     Given I signed in as user with email: "bender@rodriguez.com"
     And a user with email: "leela@example.com" and role "curator" for orphanage "Futurama"
-    And a book with title: "Mutants. Right-hand rule", owner: "leela@example.com"
     And a book with title: "Wikipedia. Premium Edition", owner: "zoidberg@example.com"
     When I go to "/books"
     Then I should see book with title: "Wikipedia. Premium Edition"
-    But I should not see book with title: "Mutants. Right-hand rule"
-    And I should not see button "Добавить новую книгу"
 
   Scenario: Mentor send comment
     Given I signed in as user with email: "bender@rodriguez.com"
