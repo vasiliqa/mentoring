@@ -36,6 +36,7 @@ group :development do
   gem 'annotate'
   gem 'awesome_print'
   gem 'spring'
+  gem 'switch_user'
 
   # Deployments stuff
   gem 'capistrano', '3.10.0', require: false
@@ -50,8 +51,8 @@ group :development, :test do
   gem 'factory_bot_rails', require: false
   gem 'pry-byebug'
   gem 'pry-rails'
-  gem 'rspec-rails'
   gem 'rspec-mocks'
+  gem 'rspec-rails'
 end
 
 group :test do

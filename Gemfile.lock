@@ -392,6 +392,7 @@ GEM
     sshkit (1.16.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    switch_user (1.5.0)
     temple (0.8.0)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
@@ -470,6 +471,7 @@ DEPENDENCIES
   simplecov
   slim-rails
   spring
+  switch_user
   turbolinks
   uglifier
 
