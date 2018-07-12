@@ -16,7 +16,8 @@ class Ability
         can :manage, Meeting, mentor_id: user.id
         can [:read, :new, :create, :update, :resend], Report, meeting_id: meetings_ids
 
-        can :read, Book, owner_id: user.curator_id
+        can :read, Book
+        can :manage, Book, owner_id: user.id
         can :manage, Album, user_id: user.id
         can :manage, Photo, user_id: user.id
 
@@ -25,8 +26,7 @@ class Ability
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: user.curator_id,
                                               trackable_type: 'Report',
                                               trackable_id: Report.where(meeting_id: meetings_ids).map(&:id)}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: user.curator_id,
-                                              trackable_type: 'Book'}
+        can :read, PublicActivity::Activity, {owner_type: 'User', trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
       end
@@ -49,8 +49,7 @@ class Ability
                                               trackable_type: 'Meeting'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: subordinates_ids,
                                               trackable_type: 'Report'}
-        can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
-                                              trackable_type: 'Book'}
+        can :read, PublicActivity::Activity, {owner_type: 'User', trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
       end
