@@ -7,6 +7,12 @@
         - @candidate.errors.full_messages.each do |message|
           li = message
 
+  .ui.green.message.large
+    ' Дорогие друзья, летом мы приостанавливаем обучение наставников, поскольку дети отдыхают
+    | в лагерях и познакомиться с ними не получится. Наши специалисты свяжутся с вами после 27 августа.
+    br
+    | Анкеты заполнять можно в любое время, мы их обязательно увидим и позвоним каждому.
+
   = form_for @candidate, html: { class: 'ui form' } do |f|
     - form_errors = @candidate.errors.messages
     .ui.segment
