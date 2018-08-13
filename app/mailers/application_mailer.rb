@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: '"Программа Детский дом" <nastavnichestvo@inbox.ru>'
+  default from: ENV['MAILER_SENDER']
   layout false
 end

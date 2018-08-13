@@ -1,0 +1,8 @@
+.git
+.gitignore
+.idea
+Dockerfile
+secrets
+spec
+tmp
+vendor/bundle
