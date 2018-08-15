@@ -5,4 +5,5 @@ Dockerfile
 secrets
 spec
 tmp
+log
 vendor/bundle

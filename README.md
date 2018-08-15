@@ -53,10 +53,12 @@ secrets/
 * `REDIS_HOST`
 
 ### Mailer configuration
-Gmail will be used as SMTP transport. Keep in mind that it has [restrictions](https://nodemailer.com/usage/using-gmail/)
-* `GMAIL_USER`
-* `GMAIL_PASS`
-* `MAILER_TOKEN` - Must be generated via `bin/rake secret`
+There are two options: you can use postfix or gmail smtp. First will be provided via one more installed container and it
+goes by default. To use `gmail` you'll need to set `GMAIL_USER` variable in compose file.
+
+Keep in mind that gmail smtp has some [restrictions](https://nodemailer.com/usage/using-gmail/)
+* `GMAIL_USER` (optional)
+* `GMAIL_PASS` (optional)
 * `MAILER_SENDER` - This is a string which represents outgoing mails `sender` field, ie `"Программа Детский дом" <nastavnichestvo@inbox.ru>`. You need to change to whatever you need
 
 ### Cookies token

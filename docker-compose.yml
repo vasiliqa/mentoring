@@ -1,14 +1,5 @@
 version: "3.6"
 services:
-  redis:
-    image: redis:4-alpine
-#    ports:
-#      - target: 6379
-#        protocol: tcp
-#        mode: host
-    volumes:
-      - /home/storage/opt/redis:/data
-#      - /opt/redis:/data
   postgres:
     image: postgres:10
     # make sure that your db local storage will be located on one node. If you have several nodes
@@ -17,9 +8,8 @@ services:
     #   placement:
     #     constraints: [node.hostname == node-name]
     volumes:
-      # change this vvv
-      - /home/storage/opt/postgres/data:/var/lib/postgresql/data
-#      - /opt/postgres/data:/var/lib/postgresql/data
+      # don't forget to locally create folders for persistent storage
+      - /opt/postgres/data:/var/lib/postgresql/data
     environment:
       DB_NAME: mentoring
       DB_USERNAME: mentoring
@@ -32,61 +22,45 @@ services:
         target: /docker-entrypoint-initdb.d/init-mentoring-user-db.sh
         mode: 0555
     secrets:
-#      - postgres_admin_password
       - db_userpass
+  postfix:
+    image: boky/postfix:latest
+    environment:
+      # @see: https://hub.docker.com/r/boky/postfix/
+      # set variables as you need
+      ALLOWED_SENDER_DOMAINS: <you sender domain>
   mentoring:
     image: mentoring:latest
-#    entrypoint: /migrate
-#    command: bundle exec cap production deploy
-#    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     # wait till postgres loads
     command: sh -c './script/wait-for postgres:5432 -- ./script/run'
-#    volumes:
-#      - .:/mentoring
-#    pid: "host"
     ports:
-      - "3030:3000"
+      - "3000:3000"
     depends_on:
       - redis
       - postgres
     environment:
-      HTTP_HOST: localhost
-      REDIS_HOST: redis
+      HTTP_HOST: nastavnik24.ru
       DB_HOST: postgres
-#      DB_HOST: postgres
       DB_NAME: mentoring
       DB_USERNAME: mentoring
-#      DB_USERNAME: mentoring
-#      DB_USERPASS: /run/secrets/postgres_admin_password
       DB_USERPASS: /run/secrets/db_userpass
-      # will be used as a mail transport
-      GMAIL_USER: sunlark.tests@gmail.com
-#      GMAIL_USER: <gmail account here>
+      # setting up gmail as smtp is optional if you want to use internal postfix, it will be used
+      # when you leave this variable commented out, otherwise gmail will be used
+      # GMAIL_USER: <gmail address here>
       GMAIL_PASS: /run/secrets/gmail_password
-      # these two uses one time while db initialization
-      MAILER_SENDER: '"Программа Детский дом" <sunlark.tests@gmail.com>'
-#      MAILER_SENDER: '"Программа Детский дом" <nastavnichestvo@inbox.ru>'
-      MAILER_TOKEN: /run/secrets/mailer_token
-      ADMIN_EMAIL: newsiberian2015@yandex.ru
-#      ADMIN_EMAIL: <admin email here>
+      MAILER_SENDER: '"Программа Детский дом" <nastavnichestvo@inbox.ru>'
+      ADMIN_EMAIL: <admin email here>
       ADMIN_PASSWORD: /run/secrets/admin_password
       # must be generated via `bin/rails secrets`
       SECRET_KEY_BASE: /run/secrets/secret_key_base
-#      LANG: "en_US.UTF-8"
-#    configs:
-#      - source: migrate
-#        target: /migrate
-#        mode: 0540
-#      - source: run
-#        target: /run
-#        mode: 0540
+      LANG: en_US.UTF-8
     secrets:
-#      - postgres_admin_password
       - db_userpass
       - gmail_password
-#      - admin_password
+      - admin_password
       - secret_key_base
 configs:
+  # these files must be in the <folder there this file located>/script folder before building an image
   migrate.sh:
     file: script/migrate
   run.sh:
@@ -96,16 +70,13 @@ configs:
   update-postgres-configs.sh:
     file: script/update-postgres-configs.sh
 secrets:
-  # these files must be in the <app>/secrets folder before building an image
-#  postgres_admin_password:
-#    file: secrets/postgres_admin_password
+  # these files must be in the <folder there this file located>/secrets folder before building an image
   db_userpass:
     file: secrets/db_userpass
+  # this is optional
   gmail_password:
     file: secrets/gmail_password
   admin_password:
     file: secrets/admin_password
   secret_key_base:
     file: secrets/secret_key_base
-  mailer_token:
-    file: secrets/mailer_token
