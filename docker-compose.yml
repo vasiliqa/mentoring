@@ -1,5 +1,10 @@
 version: "3.6"
 services:
+  redis:
+    image: redis:4-alpine
+    volumes:
+    # don't forget to create /opt/redis folder within your local fs
+    - /opt/redis:/data
   postgres:
     image: postgres:10
     # make sure that your db local storage will be located on one node. If you have several nodes

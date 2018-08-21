@@ -57,6 +57,9 @@ Rails.application.configure do
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
+  # @see: https://github.com/redis-store/redis-rails
+  # redis host here is a hostname of redis docker container. Check docker-compose.yml for more info
+  config.cache_store = :redis_store, "redis://redis:6379/0/cache", { expires_in: 90.minutes }
 
 
   # Ignore bad email addresses and do not raise email delivery errors.
