@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.1.4'
 gem 'pg'
+gem 'redis-rails'
 
 gem 'aasm'
 gem 'active_link_to'

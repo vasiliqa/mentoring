@@ -14,4 +14,7 @@
 /coverage/*
 
 *.rdb
+
+# docker secrets
+/secrets
 TODO.txt

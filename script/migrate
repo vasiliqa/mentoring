@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+if psql -h postgres --username="$DB_USERNAME" --dbname="$DB_NAME" -c 'SELECT * FROM users;'
+then
+  echo 'Database $DB_NAME already initiated'
+else
+  echo 'Database $DB_NAME not yet initiated. Initiating...'
+  DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:schema:load
+  bundle exec rake db:seed
+fi
