@@ -37,6 +37,7 @@
 class User < ApplicationRecord
   has_many :children, foreign_key: :mentor_id
   has_many :meetings, foreign_key: :mentor_id
+  has_many :reports, foreign_key: :mentor_id
   has_many :subordinates, class_name: 'User', foreign_key: :curator_id
   has_many :books, foreign_key: :owner_id
   has_many :comments

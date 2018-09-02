@@ -14,7 +14,7 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
-    @report = Report.new(meeting_id: params[:meeting_id])
+    @report = current_user.reports.new
     authorize! :new, @report
   end
 
@@ -25,9 +25,10 @@ class ReportsController < ApplicationController
   # POST /reports
   def create
     @report.state = :new
+    @report.mentor_id = current_user.id
     if @report.save
-      redirect_to Meeting, notice: 'Отчёт был успешно создан.'
-      ReportsMailer.new_report(@report).deliver_now if @report.meeting.mentor.curator
+      redirect_to reports_path, notice: 'Отчёт был успешно создан.'
+      ReportsMailer.new_report(@report).deliver_now if @report.mentor.curator
     else
       render :new, notice: 'Не удалось создать отчёт.'
     end
@@ -75,9 +76,11 @@ class ReportsController < ApplicationController
   end
 
   private
-    def report_params
-      params.require(:report).permit(:aim, :meeting_id, :duration,
-                                     :short_description, :result,
-                                     :feelings, :questions, :next_aim, :other_comments)
-    end
+
+  def report_params
+    params.require(:report).permit(
+      :feelings, :visits_count, :description, :difficulties, :difficulties_comment,
+      :need_help, :questions, :questions_comment, :share_permission
+    )
+  end
 end

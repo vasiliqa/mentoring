@@ -6,11 +6,7 @@
       .summary
         = link_to a.owner.full_name, user_path(a.owner)
         | &nbsp;отклонил(а)&nbsp;
-        = link_to report_path(a.trackable) do
-          | отчёт о встрече с ребёнком&nbsp;
-          = a.trackable.meeting.child.name
-        | &nbsp;на&nbsp;
-        = l a.trackable.meeting.date
+        = link_to 'отчёт', report_path(a.trackable)
         .date
           = time_ago_in_words a.created_at
           | &nbsp;назад

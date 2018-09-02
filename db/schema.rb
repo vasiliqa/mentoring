@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414180238) do
+ActiveRecord::Schema.define(version: 20180901191020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -241,19 +241,20 @@ ActiveRecord::Schema.define(version: 20180414180238) do
   end
 
   create_table "reports", id: :serial, force: :cascade do |t|
-    t.text "aim"
     t.string "state"
-    t.integer "meeting_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "duration"
-    t.text "short_description"
-    t.text "result"
     t.text "feelings"
-    t.text "questions"
-    t.text "next_aim"
-    t.text "other_comments"
-    t.index ["meeting_id"], name: "index_reports_on_meeting_id"
+    t.bigint "mentor_id"
+    t.integer "visits_count"
+    t.text "description"
+    t.integer "difficulties"
+    t.text "difficulties_comment"
+    t.integer "need_help"
+    t.integer "questions"
+    t.text "questions_comment"
+    t.boolean "share_permission"
+    t.index ["mentor_id"], name: "index_reports_on_mentor_id"
   end
 
   create_table "roles", id: :serial, force: :cascade do |t|
@@ -311,6 +312,6 @@ ActiveRecord::Schema.define(version: 20180414180238) do
   add_foreign_key "meetings", "children"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
-  add_foreign_key "reports", "meetings"
+  add_foreign_key "reports", "users", column: "mentor_id"
   add_foreign_key "users", "orphanages"
 end

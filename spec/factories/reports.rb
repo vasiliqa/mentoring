@@ -2,36 +2,37 @@
 #
 # Table name: reports
 #
-#  id                :integer          not null, primary key
-#  aim               :text
-#  state             :string
-#  meeting_id        :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  duration          :integer
-#  short_description :text
-#  result            :text
-#  feelings          :text
-#  questions         :text
-#  next_aim          :text
-#  other_comments    :text
+#  id                   :integer          not null, primary key
+#  state                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  feelings             :text
+#  mentor_id            :integer
+#  visits_count         :integer
+#  description          :text
+#  difficulties         :integer
+#  difficulties_comment :text
+#  need_help            :integer
+#  questions            :integer
+#  questions_comment    :text
+#  share_permission     :boolean
 #
 # Indexes
 #
-#  index_reports_on_meeting_id  (meeting_id)
+#  index_reports_on_mentor_id  (mentor_id)
 #
 
 FactoryBot.define do
   factory :report do
-    duration 2
-    aim 'aim'
-    short_description 'short_description'
     feelings 'feelings'
-    questions 'questions'
-    next_aim 'next_aim'
-    result 'result'
-    other_comments 'other_comments'
-    meeting_id 1
+    visits_count 1
+    description 'description'
+    difficulties 1
+    difficulties_comment 'comment'
+    need_help 1
+    questions 1
+    questions_comment 'comment'
+    share_permission true
+    mentor_id 1
   end
-
 end

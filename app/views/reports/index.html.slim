@@ -11,8 +11,6 @@ p#alert = flash[:error]
         th
           | Дата
         th
-          | Ребенок
-        th
           | Наставник
         th
           | Статус
@@ -26,9 +24,8 @@ p#alert = flash[:error]
       - else
         - @reports.each do |report|
           tr
-            td = report.meeting.date.strftime("%d-%m-%Y")
-            td = report.meeting.child.name
-            td = report.meeting.mentor.email
+            td = report.created_at.strftime("%d-%m-%Y")
+            td = link_to report.mentor.full_name, user_url(report.mentor)
             td = report.aasm.human_state
             td
               = link_to report_path(report), class: 'ui basic button green' do
@@ -49,3 +46,8 @@ p#alert = flash[:error]
                 = link_to approve_report_path(report), class: 'ui basic button green' do
                   i.icon.checkmark
                   | Одобрить
+
+- if can? :new, Report
+  = link_to new_report_path, class: 'ui button green' do
+    i.icon.plus
+    | Создать новый отчёт

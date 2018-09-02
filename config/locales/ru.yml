@@ -416,23 +416,20 @@ ru:
         state: Статус
         state/new: новый
         state/rejected: отклонён
-        state/report_sent: отчёт отправлен
-        state/report_rejected: отчёт отклонён
-        state/report_approved: отчёт одобрен
       report:
-        duration: Длительность
-        aim: Чем планировали заниматься на встрече?
-        short_description: Чем в итоге занимались?
-        questions: Вопросы
-        result: Оцените настроение ребенка до и после встречи
-        feelings: Опишите свое настроение после встречи
-        next_aim: Цель на следующую встречу
-        other_comments: Дополнительные комментарии
+        feelings: Каково ваше самоощущение после описываемого периода?
+        visits_count: Сколько раз вы приезжали в детский дом в этом месяце?
+        description: Расскажите, как прошел этот месяц?
+        difficulties: Были ли у вас сложности в этом месяце?
+        difficulties_comment: Комментарий
+        need_help: Требуется ли вам помощь/консультация психолога фонда?
+        questions: Есть ли у вас вопросы, которые вы бы хотели обсудить на супервизии?
+        questions_comment: Комментарий
+        share_permission: Выберите приемлемый для вас вариант
         state: Статус
         state/new: новый
         state/rejected: отклонён
         state/approved: одобрен
-        meeting: Встреча
       book:
         name: Название
         priority: Приоритет

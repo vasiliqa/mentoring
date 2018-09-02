@@ -22,7 +22,6 @@ class Meeting < ApplicationRecord
 
   belongs_to :child
   belongs_to :mentor, foreign_key: :mentor_id, class_name: 'User'
-  has_one :report
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
 
   validates :date, presence: true
@@ -34,9 +33,6 @@ class Meeting < ApplicationRecord
   aasm column: :state, whiny_transitions: false do
     state :new, initial: true
     state :rejected
-    state :report_sent
-    state :report_rejected
-    state :report_approved
 
     event :reject do
       before do
@@ -46,10 +42,6 @@ class Meeting < ApplicationRecord
       transitions from: :new, to: :rejected
     end
 
-    event :send_report do
-      transitions from: [:new, :report_rejected], to: :report_sent
-    end
-
     event :reopen do
       before do
         create_activity :reopen, owner: mentor
@@ -57,14 +49,5 @@ class Meeting < ApplicationRecord
 
       transitions from: :rejected, to: :new
     end
-
-    event :approve_report do
-      transitions from: :report_sent, to: :report_approved
-    end
-
-    event :reject_report do
-      transitions from: :report_sent, to: :report_rejected
-    end
   end
-
 end

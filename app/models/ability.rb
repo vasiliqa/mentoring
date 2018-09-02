@@ -9,12 +9,13 @@ class Ability
 
       if user.has_role?(:mentor)
         meetings_ids = user.meetings.pluck(:id)
+        reports_ids = user.reports.pluck(:id)
 
         common_access user
         can :read, User, id: user.curator_id
 
         can :manage, Meeting, mentor_id: user.id
-        can [:read, :new, :create, :update, :resend], Report, meeting_id: meetings_ids
+        can [:read, :new, :create, :update, :resend], Report, mentor_id: user.id
 
         can :read, Book
         can :manage, Book, owner_id: user.id
@@ -24,8 +25,7 @@ class Ability
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: user.curator_id,
                                               trackable_type: 'Meeting', trackable_id: meetings_ids}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: user.curator_id,
-                                              trackable_type: 'Report',
-                                              trackable_id: Report.where(meeting_id: meetings_ids).map(&:id)}
+                                              trackable_type: 'Report', trackable_id: reports_ids}
         can :read, PublicActivity::Activity, {owner_type: 'User', trackable_type: 'Book'}
         can :read, PublicActivity::Activity, {owner_type: 'User', owner_id: collaborators_ids,
                                               trackable_type: 'Photo'}
@@ -37,8 +37,8 @@ class Ability
         common_access user
         can :read, User, curator_id: user.id
 
-        can [:read, :reject, :reject_report, :approve_report], Meeting, mentor_id: subordinates_ids
-        can [:read, :reject, :approve], Report, meeting: { mentor_id: subordinates_ids }
+        can [:read, :reject], Meeting, mentor_id: subordinates_ids
+        can [:read, :reject, :approve], Report, mentor_id: subordinates_ids
 
         can :read, Book
         can :manage, Book, owner_id: user.id

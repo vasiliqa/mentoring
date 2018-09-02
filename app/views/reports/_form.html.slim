@@ -1,4 +1,5 @@
 = form_for @report, html: { class: 'ui form large'} do |f|
+  - form_errors = @report.errors.messages
   - if @report.errors.any?
     #error_explanation
       h2 Отчёт не удалось сохранить из-за ошибок:
@@ -6,39 +7,67 @@
         - @report.errors.full_messages.each do |message|
           li = message
 
-  = f.hidden_field :meeting_id, value: @report.meeting_id || params[:meeting_id]
-
-  .field.four.wide
-    = f.label :duration, '1.  ' + Report.human_attribute_name(:duration)
-    = f.number_field :duration, min: 0
-
-  .field.eight.wide
-    = f.label :aim, '2.  ' + Report.human_attribute_name(:aim)
-    = f.text_area :aim
+  .field.required class=('error' if form_errors[:visits_count].present?)
+    = f.label :visits_count, Report.human_attribute_name(:visits_count)
+    = f.number_field :visits_count, min: 0
   br
-  .field.eight.wide
-    = f.label :short_description, '3.  ' + Report.human_attribute_name(:short_description)
-    = f.text_area :short_description
+  .field.required class=('error' if form_errors[:description].present?)
+    = f.label :description, Report.human_attribute_name(:description)
+    p style="font-size: 0.9em"
+      | (чем вы занимались с ребенком, что произошло нового, видите ли вы какие-либо изменения в ваших взаимоотношениях с ребенком и т.д.)
+    = f.text_area :description
   br
-  .field.eight.wide
-    = f.label :result, '4.  ' + Report.human_attribute_name(:result)
-    = f.text_area :result
+  .field class=('error' if form_errors[:difficulties_comment].present?)
+    label = Report.human_attribute_name(:difficulties)
+    p style="font-size: 0.9em"
+      | (в общении с ребенком, во взаимоотношении с воспитателями и пр.). Если да, то расскажите подробнее в комментарии
+    .fields.radio_button
+      .inline.field.radio.checkbox
+        = f.radio_button :difficulties, 1
+        = f.label :difficulties_1, 'Да', style: 'font-weight: normal'
+      .inline.field.radio.checkbox
+        = f.radio_button :difficulties, 0
+        = f.label :difficulties_0, 'Нет', style: 'font-weight: normal'
+    = f.text_area :difficulties_comment, rows: 5
   br
-  .field.eight.wide
-    = f.label :next_aim, '5.  ' + Report.human_attribute_name(:next_aim)
-    = f.text_area :next_aim
+  .field
+    = f.label :feelings, Report.human_attribute_name(:feelings)
+    = f.text_area :feelings, rows: 5
   br
-  .field.eight.wide
-    = f.label :feelings, '6.  ' + Report.human_attribute_name(:feelings)
-    = f.text_area :feelings
+  .field
+    label = Report.human_attribute_name(:need_help)
+    .fields.radio_button
+      .inline.field.radio.checkbox
+        = f.radio_button :need_help, 1
+        = f.label :need_help_1, 'Да', style: 'font-weight: normal'
+      .inline.field.radio.checkbox
+        = f.radio_button :need_help, 0
+        = f.label :need_help_0, 'Нет', style: 'font-weight: normal'
+      .inline.field.radio.checkbox
+        = f.radio_button :need_help, 2
+        = f.label :need_help_2, 'Затрудняюсь ответить', style: 'font-weight: normal'
   br
-  .field.eight.wide
-    = f.label :other_comments, '7.  ' + Report.human_attribute_name(:other_comments)
-    = f.text_area :other_comments
+  .field class=('error' if form_errors[:questions_comment].present?)
+    label = Report.human_attribute_name(:questions)
+    p style="font-size: 0.9em"
+      | (организационные, вопросы по взаимоотношению с ребенком и с воспитателями и пр.) Если да, то расскажите подробнее в комментарии
+    .fields.radio_button
+      .inline.field.radio.checkbox
+        = f.radio_button :questions, 1
+        = f.label :questions_1, 'Да', style: 'font-weight: normal'
+      .inline.field.radio.checkbox
+        = f.radio_button :questions, 0
+        = f.label :questions_0, 'Нет', style: 'font-weight: normal'
+    = f.text_area :questions_comment, rows: 5
   br
-  .field.eight.wide
-    = f.label :questions, '8.  ' + Report.human_attribute_name(:questions)
-    = f.text_area :questions
-
+  .field.required class=('error' if form_errors[:share_permission].present?)
+    label = Report.human_attribute_name(:share_permission)
+    .inline.field.radio.checkbox
+      = f.radio_button :share_permission, true
+      = f.label :share_permission_true, 'Не возражаю, если мой отчет разместят в группе', style: 'font-weight: normal'
+    .inline.field.radio.checkbox
+      = f.radio_button :share_permission, false
+      = f.label :share_permission_false, 'Хочу, чтобы мой отчет остался внутренним', style: 'font-weight: normal'
+  br
   .actions
     = f.submit class: 'ui green button'

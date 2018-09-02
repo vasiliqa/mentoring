@@ -2,38 +2,41 @@
 #
 # Table name: reports
 #
-#  id                :integer          not null, primary key
-#  aim               :text
-#  state             :string
-#  meeting_id        :integer
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  duration          :integer
-#  short_description :text
-#  result            :text
-#  feelings          :text
-#  questions         :text
-#  next_aim          :text
-#  other_comments    :text
+#  id                   :integer          not null, primary key
+#  state                :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  feelings             :text
+#  mentor_id            :integer
+#  visits_count         :integer
+#  description          :text
+#  difficulties         :integer
+#  difficulties_comment :text
+#  need_help            :integer
+#  questions            :integer
+#  questions_comment    :text
+#  share_permission     :boolean
 #
 # Indexes
 #
-#  index_reports_on_meeting_id  (meeting_id)
+#  index_reports_on_mentor_id  (mentor_id)
 #
 
 class Report < ApplicationRecord
   include AASM
   include PublicActivity::Model
-  tracked only: [:create], owner: -> (controller, model) { model.meeting.mentor }
+  tracked only: [:create], owner: -> (controller, model) { model.mentor }
 
-  belongs_to :meeting
+  belongs_to :mentor, class_name: 'User'
   has_many :activities, as: :trackable, class_name: 'PublicActivity::Activity', dependent: :destroy
 
-  validates :duration, :aim, :short_description, :result, :feelings, :questions, :next_aim, :other_comments, presence: true
-
-  after_create do
-    meeting.send_report!
-  end
+  validates :description, presence: true
+  validates :visits_count, numericality: { greater_than_or_equal_to: 0, only_integer: true}
+  validates :difficulties, :questions, inclusion: { in: [0, 1] }, allow_nil: true
+  validates :need_help, inclusion: { in: [0, 1, 2] }, allow_nil: true
+  validates :difficulties_comment, presence: true, if: Proc.new { |r| r.difficulties == 1 }
+  validates :questions_comment, presence: true, if: Proc.new { |r| r.questions == 1 }
+  validates :share_permission, inclusion: { in: [true, false] }
 
   aasm column: :state, whiny_transitions: false do
     state :new, initial: true
@@ -42,10 +45,7 @@ class Report < ApplicationRecord
 
     event :reject do
       after do
-        meeting.reject_report
-        meeting.save
-
-        create_activity :reject, owner: meeting.mentor.curator
+        create_activity :reject, owner: mentor.curator
       end
 
       transitions from: :new, to: :rejected
@@ -53,10 +53,7 @@ class Report < ApplicationRecord
 
     event :resend do
       after do
-        meeting.send_report
-        meeting.save
-
-        create_activity :resend, owner: meeting.mentor
+        create_activity :resend, owner: mentor
       end
 
       transitions from: :rejected, to: :new
@@ -64,14 +61,10 @@ class Report < ApplicationRecord
 
     event :approve do
       after do
-        meeting.approve_report
-        meeting.save
-
-        create_activity :approve, owner: meeting.mentor.curator
+        create_activity :approve, owner: mentor.curator
       end
 
       transitions from: :new, to: :approved
     end
   end
-
 end

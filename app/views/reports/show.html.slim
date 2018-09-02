@@ -1,64 +1,59 @@
 p#notice = notice
 
-
 .ui.orange.segment
   p
+    strong Наставник
+    .ui.segment
+      = link_to @report.mentor.full_name, user_url(@report.mentor)
+
+  p
     strong = Report.human_attribute_name(:state)
-    br
-    = @report.aasm.human_state
-
-  p
-    strong = '1.  ' + Report.human_attribute_name(:duration)
-    br
-    = @report.duration
-
-  p
-    strong = '2.  ' + Report.human_attribute_name(:aim)
     .ui.segment
-      = simple_format @report.aim
+      = @report.aasm.human_state
 
   p
-    br
-    strong = '3.  ' + Report.human_attribute_name(:short_description)
+    strong = Report.human_attribute_name(:visits_count)
     .ui.segment
-      = simple_format @report.short_description
+      = @report.visits_count
 
   p
-    br
-    strong = '4.  ' + Report.human_attribute_name(:result)
+    strong = Report.human_attribute_name(:description)
     .ui.segment
-      = simple_format @report.result
+      = simple_format @report.description
 
   p
-    br
-    strong = '5.  ' + Report.human_attribute_name(:next_aim)
+    strong = Report.human_attribute_name(:difficulties)
     .ui.segment
-      = simple_format @report.next_aim
+      - if @report.difficulties
+        = @report.difficulties == 1 ? 'Да' : 'Нет'
+      = simple_format @report.difficulties_comment
 
   p
-    br
-    strong = '6.  ' + Report.human_attribute_name(:feelings)
+    strong = Report.human_attribute_name(:feelings)
     .ui.segment
       = simple_format @report.feelings
 
   p
-    br
-    strong = '7.  ' + Report.human_attribute_name(:other_comments)
+    strong = Report.human_attribute_name(:need_help)
     .ui.segment
-      = simple_format @report.other_comments
+      - if @report.need_help == 0
+        | Нет
+      - if @report.need_help == 1
+        | Да
+      - if @report.need_help == 2
+        | Затрудняюсь ответить
 
   p
-    br
-    strong = '8.  ' + Report.human_attribute_name(:questions)
+    strong = Report.human_attribute_name(:questions)
     .ui.segment
-      = simple_format @report.questions
+      - if @report.questions
+        = @report.questions == 1 ? 'Да' : 'Нет'
+      = simple_format @report.questions_comment
 
-  - if can?(:read, @report.meeting)
-    p
-      strong Встреча:
-      br
-      = link_to "#{@report.meeting.mentor.email} и #{@report.meeting.child.name} (#{l(@report.meeting.date)})",
-                meeting_path(@report.meeting)
+  p
+    strong = Report.human_attribute_name(:share_permission)
+    .ui.segment
+      = @report.share_permission? ? 'Не возражаю, если мой отчет разместят в группе' : 'Хочу, чтобы мой отчет остался внутренним'
 
   .actions
     - if (@report.state != 'approved') && can?(:update, @report)

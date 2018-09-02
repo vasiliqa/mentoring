@@ -2,11 +2,7 @@ h3 Составлен новый отчёт
 
 p
   | Составил:&nbsp;
-  = link_to @report.meeting.mentor.full_name, user_url(@report.meeting.mentor)
-
-p
-  | Ребёнок:&nbsp;
-  = @report.meeting.child.name
+  = link_to @report.mentor.full_name, user_url(@report.mentor)
 
 p
   = link_to 'Ссылка на отчёт', report_url(@report)

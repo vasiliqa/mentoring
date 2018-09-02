@@ -26,11 +26,6 @@ p#alert = alert
     br
     = @meeting.mentor.email
 
-  - if @meeting.report && can?(:read, @meeting.report)
-    p
-      strong
-        = link_to 'Отчёт', report_path(@meeting.report)
-
   .actions
     - if @meeting.may_reject? && can?(:reject, @meeting)
       = link_to reject_meeting_path(@meeting), class: 'ui button green' do
@@ -41,10 +36,5 @@ p#alert = alert
       = link_to reopen_meeting_path(@meeting), class: 'ui button green' do
         i.icon.repeat
         | Переназначить встречу
-
-    - if @meeting.may_send_report? && @meeting.report.blank? && (@meeting.date-7*60*60).past? && can?(:new, Report)
-      = link_to new_report_path(meeting_id: @meeting.id), class: 'ui button green' do
-        i.icon.file.text.outline
-        | Составить отчёт
 
 == render 'back'
