@@ -12,7 +12,6 @@ Feature: EmailNotifications
     And a user with email: "bender@rodriguez.com" and role "mentor" for child "Fry" and curator: "zoidberg@example.com"
     And a user with email: "hubert.j@farnsworth.com" and role "admin"
 
-  @javascript
   Scenario: New candidate created
     When I go to "/candidates/new"
     And I fill in all "text" inputs with "test"

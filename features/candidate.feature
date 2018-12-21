@@ -1,7 +1,6 @@
 Feature: new candidate
   In order to guest user can send CV and an admin can approve CV
 
-  @javascript
   Scenario: correct
     When I go to "/candidates/new"
     And I fill in all "text" inputs with "test"
@@ -15,7 +14,6 @@ Feature: new candidate
     And I click to the submit button
     Then I should see success message
 
-  @javascript
   Scenario: incorrect
     When I go to "/candidates/new"
     Then I should see disabled submit button
