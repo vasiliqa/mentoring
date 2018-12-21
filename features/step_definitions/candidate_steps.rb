@@ -1,7 +1,3 @@
-And(/^I wait "(.+)" seconds$/) do |seconds|
-  sleep seconds.to_i
-end
-
 When(/^I fill in all "(.+)" inputs with "(.+)"$/) do |type, value|
   page.all("input[type=#{type}]").each do |input|
     input.set(value)

@@ -29,14 +29,6 @@ Then /^I should see book with title: "(.+)"$/ do |name|
   expect(page).to have_css('tbody tr td', text: name)
 end
 
-Then /^I should not see book with title: "(.+)"$/ do |name|
-  expect(page).to_not have_css('tbody tr td', text: name)
-end
-
-Then /^I should not see button "(.+)"$/ do |name|
-  expect(page).to_not have_css('ui.button', text: name)
-end
-
 When /^I click on book with title: "(.+)"$/ do |name|
   page.find('td a', text: name).click
 end
