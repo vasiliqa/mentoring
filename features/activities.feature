@@ -22,7 +22,7 @@ Feature: Activities
     Given user "bender@rodriguez.com" has album "Planet Express"
     And a photo in the album "Planet Express"
     And a meeting to "Fry" and user "bender@rodriguez.com" at tomorrow
-    And meeting to "Fry" and user "bender@rodriguez.com" at yesterday on state "report_sent"
+    And a report from user "bender@rodriguez.com" on state "new"
     And I signed in as user with email: "zoidberg@example.com"
     When I go to dashboard
     Then I should see activities about new photo

@@ -15,5 +15,5 @@ Then /^I should see activities about new meeting$/ do
 end
 
 Then /^I should see activities about new report$/ do
-  expect(page).to have_content('отчёт о встрече')
+  expect(page).to have_content('составил(а) отчёт')
 end

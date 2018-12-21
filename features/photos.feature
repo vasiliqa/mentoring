@@ -21,6 +21,6 @@ Feature: Photos
 
   Scenario: Show photos on user's page
     Given I signed in as user with email: "zoidberg@example.com"
-     And user "bender@rodriguez.com" has album "Planet Express"
+    And user "bender@rodriguez.com" has album "Planet Express"
     When I go to page of user "bender@rodriguez.com"
     Then I should see album "Planet Express"

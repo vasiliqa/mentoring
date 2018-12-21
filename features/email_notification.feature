@@ -39,20 +39,15 @@ Feature: EmailNotifications
     And curator should receive email-notification
 
   Scenario: New report created
-    Given a meeting to "Fry" and user "bender@rodriguez.com" at yesterday
-    And I signed in as user with email: "bender@rodriguez.com"
-    When I go to "/meetings"
-    And I click to the button "Составить отчёт"
-    And I fill in an input "report_duration" as "2" in the form "new_report"
-    And I fill in an input "report_aim" as "blitzkrieg" in the form "new_report"
-    And I fill in an input "report_short_description" as "blitzkrieg" in the form "new_report"
-    And I fill in an input "report_result" as "fail" in the form "new_report"
-    And I fill in an input "report_feelings" as "vexation" in the form "new_report"
-    And I fill in an input "report_next_aim" as "no" in the form "new_report"
-    And I fill in an input "report_other_comments" as "no" in the form "new_report"
-    And I fill in an input "report_questions" as "no" in the form "new_report"
+    Given I signed in as user with email: "bender@rodriguez.com"
+    When I go to "/reports"
+    And I click to the button "Создать новый отчёт"
+    And I fill in an input "report_visits_count" as "2" in the form "new_report"
+    And I fill in all textarea fields with "test"
+    And I choose each radio button with label "Да"
+    And I choose radio button with label "Не возражаю, если мой отчет разместят в группе" in the form "new_report"
     And I click to the submit button
-    Then a report of the meeting should be created
+    Then a report should be created
     And curator should receive email-notification
 
   Scenario: Candidate approved
