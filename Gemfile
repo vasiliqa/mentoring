@@ -26,7 +26,7 @@ gem 'rolify'
 gem 'sass-rails'
 gem 'sdoc', group: :doc
 gem 'semantic-ui-sass'
-gem 'sidekiq'
+gem 'sidekiq', '5.0.5'
 gem 'slim-rails'
 gem 'switch_user'
 gem 'turbolinks'

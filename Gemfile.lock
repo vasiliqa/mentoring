@@ -343,11 +343,11 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
     semantic-ui-sass (2.4.0.1)
       sass (>= 3.2)
-    sidekiq (5.2.5)
-      connection_pool (~> 2.2, >= 2.2.2)
-      rack (>= 1.5.0)
+    sidekiq (5.0.5)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
-      redis (>= 3.3.5, < 5)
+      redis (>= 3.3.4, < 5)
     simplecov (0.16.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -446,7 +446,7 @@ DEPENDENCIES
   sdoc
   selenium-webdriver
   semantic-ui-sass
-  sidekiq
+  sidekiq (= 5.0.5)
   simplecov
   slim-rails
   spring
