@@ -6,6 +6,7 @@ Feature: Reporting
     Given a orphanage "#13"
     And a child with name "Stalin" in orphanage "#13"
     And a user with email: "psych@example.com" and role "curator" for orphanage "#13"
+    And a user with email: "review@example.com" and role "report_reviewer" for orphanage "#13"
     And a user with email: "mentor@example.com" and role "mentor" for child "Stalin" and curator: "psych@example.com"
 
   Scenario: Send report
@@ -24,6 +25,13 @@ Feature: Reporting
 
   Scenario: A curator reject report
     Given I signed in as user with email: "psych@example.com"
+    And a report from user "mentor@example.com" on state "new"
+    When I go to "/reports"
+    And I reject a report of meeting
+    Then the report should have state "rejected"
+
+  Scenario: A reviewer reject report
+    Given I signed in as user with email: "review@example.com"
     And a report from user "mentor@example.com" on state "new"
     When I go to "/reports"
     And I reject a report of meeting

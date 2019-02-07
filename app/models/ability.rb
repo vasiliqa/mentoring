@@ -54,6 +54,11 @@ class Ability
                                               trackable_type: 'Photo'}
       end
 
+      if user.has_role?(:report_reviewer)
+        subordinates_ids = user.orphanage.users.with_role(:mentor).pluck(:id)
+        can [:read, :reject, :approve], Report, mentor_id: subordinates_ids
+      end
+
       can :manage, :all if user.has_role?(:admin)
     end
   end

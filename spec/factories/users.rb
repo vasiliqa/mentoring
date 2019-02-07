@@ -61,5 +61,10 @@ FactoryBot.define do
       email  { 'admin@example.com' }
       after(:create) {|user| user.add_role(:admin)}
     end
+
+    trait :report_reviewer do
+      email  { 'report_reviewer@example.com' }
+      after(:create) {|user| user.add_role(:report_reviewer)}
+    end
   end
 end
