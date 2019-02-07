@@ -17,10 +17,9 @@
 
 FactoryBot.define do
   factory :meeting do
-    date 1.day.since
-    state 'new'
-    child_id 1
-    mentor_id 2
+    date { 1.day.since }
+    state { 'new' }
+    child_id { 1 }
+    mentor_id { 2 }
   end
-
 end

@@ -61,64 +61,64 @@
 
 FactoryBot.define do
   factory :candidate do
-    last_name "Laden"
-    first_name "Osama"
-    middle_name "Bin"
-    registration_address "Pakistan, Al'Kaida Street"
-    home_address "Same as registration adress"
-    phone_number "+71112223344"
+    last_name { "Laden" }
+    first_name { "Osama" }
+    middle_name { "Bin" }
+    registration_address { "Pakistan, Al'Kaida Street" }
+    home_address { "Same as registration adress" }
+    phone_number { "+71112223344" }
     sequence(:email) {|n| "osama_#{n}@alkaida.com"}
-    birth_date 50.years.ago
-    russian_citizenship false
-    confession "Islam"
+    birth_date { 50.years.ago }
+    russian_citizenship { false }
+    confession { "Islam" }
 
-    health_status "ok"
-    serious_diseases "no"
+    health_status { "ok" }
+    serious_diseases { "no" }
 
-    organization_name "Al'Kaida"
-    work_contacts "911"
-    work_position "Leader"
-    visit_hours "9:00-18:00"
+    organization_name { "Al'Kaida" }
+    work_contacts { "911" }
+    work_position { "Leader" }
+    visit_hours { "9:00-18:00" }
 
-    hobby "Exploding"
+    hobby { "Exploding" }
 
-    martial_status "married"
-    family_attitude "great"
+    martial_status { "married" }
+    family_attitude { "great" }
 
-    program_role "Mentor"
-    want_new 5
-    plan_be_adoptive_parent 5
-    want_be_significant 5
-    want_get_experience 5
-    want_more_kids 5
-    want_be_in_team 5
-    want_change_job 5
-    pity_kids 5
-    want_pass_experience 5
-    maternal_instinct 5
-    want_increase_status 5
+    program_role { "Mentor" }
+    want_new { 5 }
+    plan_be_adoptive_parent { 5 }
+    want_be_significant { 5 }
+    want_get_experience { 5 }
+    want_more_kids { 5 }
+    want_be_in_team { 5 }
+    want_change_job { 5 }
+    pity_kids { 5 }
+    want_pass_experience { 5 }
+    maternal_instinct { 5 }
+    want_increase_status { 5 }
 
-    child_age "10"
-    child_gender "M"
-    invalid_child "Yes"
-    foreign_child "Yes"
-    unsolvable_problems "Yes"
-    tragic_events "Yes"
-    child_emotions "Yes"
-    life_changes "Yes"
+    child_age { "10" }
+    child_gender { "M" }
+    invalid_child { "Yes" }
+    foreign_child { "Yes" }
+    unsolvable_problems { "Yes" }
+    tragic_events { "Yes" }
+    child_emotions { "Yes" }
+    life_changes { "Yes" }
 
-    week_visits true
+    week_visits { true }
 
-    alcohol "yes, every day"
-    tobacco "yes"
-    psychoactive "yes, LSD-25, DMT, DOB, 2C-B etc"
-    drugs "yes, heroin, cocain, methamphetamin etc"
-    child_crime "no"
-    disabled_parental_rights "no"
+    alcohol { "yes, every day" }
+    tobacco { "yes" }
+    psychoactive { "yes, LSD-25, DMT, DOB, 2C-B etc" }
+    drugs { "yes, heroin, cocain, methamphetamin etc" }
+    child_crime { "no" }
+    disabled_parental_rights { "no" }
 
-    monthly_meeting true
-    reports true
-    photo_rights true
-    info_about_program "internet"
+    monthly_meeting { true }
+    reports { true }
+    photo_rights { true }
+    info_about_program { "internet" }
   end
 end

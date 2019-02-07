@@ -17,14 +17,14 @@
 
 FactoryBot.define do
   factory :role do
-    name 'mentor'
+    name { 'mentor' }
 
     trait :curator do
-      name 'curator'
+      name { 'curator' }
     end
 
     trait :admin do
-      name 'admin'
+      name { 'admin' }
     end
   end
 end

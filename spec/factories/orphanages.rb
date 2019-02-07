@@ -11,8 +11,7 @@
 
 FactoryBot.define do
   factory :orphanage do
-    name "MyString"
-    address "MyString"
+    name { "MyString" }
+    address { "MyString" }
   end
-
 end

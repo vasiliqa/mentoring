@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'rails', '5.1.4'
-gem 'pg'
+gem 'pg', '~> 0.21'
 
 gem 'aasm'
 gem 'active_link_to'
 gem 'bxslider-rails'
 gem 'cancancan'
-gem 'celluloid'
 gem 'cocoon'
 gem 'coffee-rails'
 gem 'devise'

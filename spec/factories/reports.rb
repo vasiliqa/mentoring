@@ -24,15 +24,15 @@
 
 FactoryBot.define do
   factory :report do
-    feelings 'feelings'
-    visits_count 1
-    description 'description'
-    difficulties 1
-    difficulties_comment 'comment'
-    need_help 1
-    questions 1
-    questions_comment 'comment'
-    share_permission true
-    mentor_id 1
+    feelings { 'feelings' }
+    visits_count { 1 }
+    description { 'description' }
+    difficulties { 1 }
+    difficulties_comment { 'comment' }
+    need_help { 1 }
+    questions { 1 }
+    questions_comment { 'comment' }
+    share_permission { true }
+    mentor_id { 1 }
   end
 end

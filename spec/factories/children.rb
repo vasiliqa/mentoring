@@ -24,10 +24,10 @@
 
 FactoryBot.define do
   factory :child do
-    first_name "Putin"
-    last_name "VVP"
-    middle_name "SVCH"
-    birthdate 14.years.ago
+    first_name { "Putin" }
+    last_name { "VVP" }
+    middle_name { "SVCH" }
+    birthdate { 14.years.ago }
     orphanage
   end
 end
