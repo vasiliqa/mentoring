@@ -44,9 +44,8 @@
         .field.five.wide.required class=('error' if form_errors[:birth_date].present?)
           = f.label :birth_date, 'Дата рождения'
           .three.fields
-            = f.date_select :birth_date,
-              { start_year: 1917, end_year: Date.today.year, include_blank: true, selected: nil,
-                date_separator: '<div class="big_date_separator"></div>'}
+             = f.text_field :birth_date, class: 'datepicker datepicker-candidate'
+
       .two.fields
         .field.eleven.wide.required  class=('error' if form_errors[:confession].present?)
           = f.label :confession, 'Вероисповедание'

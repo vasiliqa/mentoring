@@ -4,6 +4,10 @@ When(/^I fill in all "(.+)" inputs with "(.+)"$/) do |type, value|
   end
 end
 
+When(/^I fill in birth date input$/) do
+  fill_in('Дата рождения', with: Date.today - 30.years)
+end
+
 When(/^I fill in all textarea fields with "(.+)"$/) do |value|
   page.all("textarea").each do |input|
     input.set(value)

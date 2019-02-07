@@ -17,6 +17,7 @@ Feature: EmailNotifications
     And I fill in all "text" inputs with "test"
     And I fill in all textarea fields with "test"
     And I fill in all "number" inputs with "12"
+    And I fill in birth date input
     And I fill in all "email" inputs with "test@example.com"
     And I select option from each select
     And I choose each radio button with label "Да"
