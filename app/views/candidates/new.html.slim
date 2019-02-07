@@ -48,7 +48,7 @@
 
       .two.fields
         .field.eleven.wide.required  class=('error' if form_errors[:confession].present?)
-          = f.label :confession, 'Вероисповедание'
+          = f.label :confession, 'Вероисповедание (выберите из списка или укажите свой вариант)'
           = f.text_field :confession, list: 'confessions'
           datalist#confessions
             option value='Православие'
@@ -180,8 +180,8 @@
           | Какие ваши ожидания от ребёнка, с которым вы хотите взаимодействовать?
         .two.fields
           .field.required class=('error' if form_errors[:child_age].present?)
-            = f.label :child_age, 'Возраст'
-            = f.number_field :child_age, min: 7, max: 18
+            = f.label :child_age, 'Возраст (укажите интервал в пределах от 7 до 18 лет)'
+            = f.text_field :child_age
           .field.required class=('error' if form_errors[:child_gender].present?)
             = f.label :child_gender, 'Пол'
             = f.collection_select(:child_gender, Candidate::CHILD_GENDERS, :to_s, :to_s, { prompt: 'Выбрать...' })
