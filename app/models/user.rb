@@ -22,7 +22,7 @@
 #  orphanage_id           :integer
 #  avatar_file_name       :string
 #  avatar_content_type    :string
-#  avatar_file_size       :integer
+#  avatar_file_size       :bigint(8)
 #  avatar_updated_at      :datetime
 #  description            :text
 #  display_on_site        :boolean          default(FALSE)
@@ -43,6 +43,7 @@ class User < ApplicationRecord
   has_many :comments
   has_many :albums
   has_many :photos
+  has_one :curated_orphanage, class_name: 'Orphanage', foreign_key: :curator_id
   belongs_to :orphanage, optional: true
   belongs_to :curator, class_name: 'User', optional: true
 

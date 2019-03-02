@@ -14,7 +14,7 @@
 #  description         :text
 #  avatar_file_name    :string
 #  avatar_content_type :string
-#  avatar_file_size    :integer
+#  avatar_file_size    :bigint(8)
 #  avatar_updated_at   :datetime
 #
 # Indexes

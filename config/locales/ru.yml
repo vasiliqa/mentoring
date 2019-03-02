@@ -403,12 +403,14 @@ ru:
         messages: Сообщения
         receipts: Уведомления
         roles: Роли
+        curated_orphanage: Курируемое учреждение
         display_on_site: Отображать на сайте
       child:
         birthdate: Дата рождения
       orphanage:
         name: Название
         address: Адрес
+        curator: Куратор
       meeting:
         report: Отчёт
         date: Дата

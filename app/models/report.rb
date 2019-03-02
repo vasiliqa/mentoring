@@ -7,7 +7,7 @@
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  feelings             :text
-#  mentor_id            :integer
+#  mentor_id            :bigint(8)
 #  visits_count         :integer
 #  description          :text
 #  difficulties         :integer

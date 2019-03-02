@@ -83,6 +83,10 @@ RailsAdmin.config do |config|
       field :users do
         inline_add false
       end
+      field :curator do
+        inline_add false
+        inline_edit false
+      end
     end
   end
 

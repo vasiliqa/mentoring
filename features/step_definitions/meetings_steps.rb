@@ -19,8 +19,8 @@ Given /^a user with email: "(.+)" and role "curator" for orphanage "(.+)"$/ do |
   FactoryBot.create :user, :curator, email: email, orphanage: Orphanage.find_by_name(orphanage_name)
 end
 
-Given /^a user with email: "(.+)" and role "report_reviewer" for orphanage "(.+)"$/ do |email, orphanage_name|
-  FactoryBot.create :user, :report_reviewer, email: email, orphanage: Orphanage.find_by_name(orphanage_name)
+Given /^a user with email: "(.+)" and role "report_reviewer", curating orphanage "(.+)"$/ do |email, orphanage_name|
+  FactoryBot.create :user, :report_reviewer, email: email, curated_orphanage: Orphanage.find_by_name(orphanage_name)
 end
 
 Given /^a user with email: "(.+)" and role "mentor" for child "(.+)" and curator: "(.+)"$/ do |email, child_name, curator_email|

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180901191020) do
+ActiveRecord::Schema.define(version: 20190302123337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20180901191020) do
     t.integer "owner_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 20180901191020) do
     t.text "description"
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.index ["orphanage_id"], name: "index_children_on_orphanage_id"
   end
@@ -224,13 +224,15 @@ ActiveRecord::Schema.define(version: 20180901191020) do
     t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "curator_id"
+    t.index ["curator_id"], name: "index_orphanages_on_curator_id"
   end
 
   create_table "photos", id: :serial, force: :cascade do |t|
     t.text "description"
     t.string "image_file_name"
     t.string "image_content_type"
-    t.integer "image_file_size"
+    t.bigint "image_file_size"
     t.datetime "image_updated_at"
     t.integer "album_id"
     t.integer "user_id"
@@ -287,7 +289,7 @@ ActiveRecord::Schema.define(version: 20180901191020) do
     t.integer "orphanage_id"
     t.string "avatar_file_name"
     t.string "avatar_content_type"
-    t.integer "avatar_file_size"
+    t.bigint "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.text "description"
     t.boolean "display_on_site", default: false
@@ -310,6 +312,7 @@ ActiveRecord::Schema.define(version: 20180901191020) do
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
   add_foreign_key "meetings", "children"
+  add_foreign_key "orphanages", "users", column: "curator_id"
   add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
   add_foreign_key "reports", "users", column: "mentor_id"

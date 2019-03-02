@@ -6,7 +6,7 @@ Feature: Reporting
     Given a orphanage "#13"
     And a child with name "Stalin" in orphanage "#13"
     And a user with email: "psych@example.com" and role "curator" for orphanage "#13"
-    And a user with email: "review@example.com" and role "report_reviewer" for orphanage "#13"
+    And a user with email: "review@example.com" and role "report_reviewer", curating orphanage "#13"
     And a user with email: "mentor@example.com" and role "mentor" for child "Stalin" and curator: "psych@example.com"
 
   Scenario: Send report
