@@ -23,6 +23,7 @@ gem 'public_activity'
 gem 'puma'
 gem 'rails_admin'
 gem 'rolify'
+gem 'rollbar'
 gem 'sass-rails'
 gem 'sdoc', group: :doc
 gem 'semantic-ui-sass'
