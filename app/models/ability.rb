@@ -55,7 +55,8 @@ class Ability
       end
 
       if user.has_role?(:report_reviewer)
-        subordinates_ids = user.curated_orphanage.users.with_role(:mentor).pluck(:id)
+        common_access user
+        subordinates_ids = user&.curated_orphanage&.users&.with_role(:mentor)&.pluck(:id)
         can [:read, :reject, :approve], Report, mentor_id: subordinates_ids
       end
 
