@@ -448,9 +448,10 @@ ru:
       role:
         name: Название
         name/admin: Администратор
-        name/curator: Психолог
+        name/curator: Куратор
         name/mentor: Наставник
         name/employee: Сотрудник детского дома
+        name/report_reviewer: Куратор ДД
       comment:
         text: Текст
         commentable: Прокомментировано
