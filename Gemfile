@@ -34,6 +34,10 @@ gem 'switch_user'
 gem 'turbolinks'
 gem 'uglifier'
 
+# fix for https://github.com/net-ssh/net-ssh/issues/565:
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
+
 group :development do
   gem 'annotate'
   gem 'awesome_print'
