@@ -1,6 +1,6 @@
 RailsAdmin.config do |config|
   config.parent_controller = ApplicationController.to_s
-  config.main_app_name = ["Детский дом", "Админка"]
+  config.main_app_name = ["Наставничество", "Админка"]
 
   # == Devise ==
   config.authenticate_with do
